@@ -40,7 +40,8 @@
                 "楽曲名 text);" &
              "create table 出演者テーブル(" &
                 "出演者id integer primary key autoincrement," &
-                "出演者名 text);" &
+                "出演者名 text," &
+                "出演者カナ名 text);" &
              "create table 出演者詳細テーブル(" &
                 "出演者詳細id integer primary key autoincrement," &
                 "出演者id integer," &
@@ -92,4 +93,76 @@
             Return False
         End Try
     End Function
+
+    Public Function C_CommandInsert(ByVal strTable As String,
+                                    ByVal htParm As Hashtable,
+                                    ByVal cmd As SQLite.SQLiteCommand) As String
+        If (htParm.Count = 0) Then
+            'スカかよ！
+            Return "パラメータのハッシュテーブルが空白です"
+        Else
+            Try
+                Dim strSQL As String = ""
+                Dim strParm As String = ""
+                Dim strValue As String = ""
+                Dim iCnt As Integer = 0
+
+                cmd.Parameters.Clear()
+
+                strSQL = "insert into " & strTable & " ("
+                For Each strKey As String In htParm.Keys
+                    If (strParm <> "") Then
+                        strParm &= ","
+                        strValue &= ","
+                    End If
+                    strParm &= strKey
+                    strValue &= "@p" & iCnt.ToString
+                    cmd.Parameters.Add(New SQLite.SQLiteParameter("@p" & iCnt.ToString, htParm(strKey)))
+                    iCnt += 1
+                Next
+
+                cmd.CommandText = strSQL & strParm & ") values (" & strValue & ")"
+                cmd.ExecuteNonQuery()
+                Return ""
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, Reflection.MethodBase.GetCurrentMethod.Name, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return ex.Message
+            End Try
+        End If
+    End Function
+
+    Public Function C_CommandUpdate(ByVal strTable As String,
+                                    ByVal htParm As Hashtable,
+                                    ByVal cmd As SQLite.SQLiteCommand,
+                                    ByVal strWhere As String) As String
+        If (htParm.Count = 0) Then
+            'スカかよ！
+            Return "パラメータのハッシュテーブルが空白です。"
+        Else
+            Try
+                Dim strSQL As String = "update " & strTable & " set "
+                Dim strParm As String = ""
+                Dim strValue As String = ""
+                Dim iCnt As Integer = 0
+
+                cmd.Parameters.Clear()
+                For Each strKey As String In htParm.Keys
+                    If (strParm <> "") Then
+                        strParm &= ","
+                    End If
+                    strParm &= strKey & "=@p" & iCnt.ToString
+                    cmd.Parameters.Add(New SQLite.SQLiteParameter("@p" & iCnt.ToString, htParm(strKey)))
+                    iCnt += 1
+                Next
+
+                cmd.CommandText = strSQL & strParm & " " & strWhere
+                cmd.ExecuteNonQuery()
+                Return ""
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, Reflection.MethodBase.GetCurrentMethod.Name, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return ex.Message
+            End Try
+        End If
+    End Function
+
 End Module
