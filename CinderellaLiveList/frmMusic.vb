@@ -1,8 +1,7 @@
 ﻿Imports System.Reflection
 Imports System.Data.SQLite
 
-Public Class frmPerson
-
+Public Class frmMusic
     Dim LG_bSetbyProg As Boolean = False
 
     ''' <summary>
@@ -50,7 +49,6 @@ Public Class frmPerson
                                 dgv.Rows.Add()
                                 dgv.Rows(iRow).Cells(col_出演者名.Index).Value = reader("出演者名")
                                 dgv.Rows(iRow).Cells(col_出演者カナ名.Index).Value = reader("出演者カナ名")
-                                dgv.Rows(iRow).Cells(col_出演者役名.Index).Value = reader("出演者役名")
                                 dgv.Rows(iRow).Cells(col_出演者id.Index).Value = reader("出演者id")
                                 dgv.Rows(iRow).Cells(col_Flag.Index).Value = ""
                             Loop
@@ -78,7 +76,6 @@ Public Class frmPerson
                                     Dim strRet As String = ""
                                     htParm("出演者名") = dgv.Rows(ii).Cells(col_出演者名.Index).Value
                                     htParm("出演者カナ名") = dgv.Rows(ii).Cells(col_出演者カナ名.Index).Value
-                                    htParm("出演者役名") = dgv.Rows(ii).Cells(col_出演者名.Index).Value
                                     Dim iID As Integer = Val(dgv.Rows(ii).Cells(col_出演者id.Index).Value)
 
                                     If iID = 0 Then
@@ -120,7 +117,7 @@ Public Class frmPerson
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub frmPerson_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmMusic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call I_Init()
         Call I_DataSet(0)
     End Sub
@@ -130,7 +127,7 @@ Public Class frmPerson
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub frmPerson_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmMusic_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If Me.DialogResult = DialogResult.OK Then
             Call I_DataSet(1)
         End If

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmLive
+Partial Class frmMusic
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -22,14 +22,15 @@ Partial Class frmLive
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLive))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMusic))
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.col_ライブ日付 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_ライブ名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_ライブid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者カナ名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_Flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -40,7 +41,7 @@ Partial Class frmLive
         Me.btnCancel.Location = New System.Drawing.Point(12, 415)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "取消"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -51,7 +52,7 @@ Partial Class frmLive
         Me.btnOK.Location = New System.Drawing.Point(713, 415)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 4
+        Me.btnOK.TabIndex = 2
         Me.btnOK.Text = "登録"
         Me.btnOK.UseVisualStyleBackColor = True
         '
@@ -59,30 +60,31 @@ Partial Class frmLive
         '
         Me.dgv.AllowUserToDeleteRows = False
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_ライブ日付, Me.col_ライブ名, Me.col_ライブid, Me.col_Flag})
-        Me.dgv.Location = New System.Drawing.Point(12, 12)
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_出演者名, Me.col_出演者カナ名, Me.col_出演者id, Me.col_Flag})
+        Me.dgv.Location = New System.Drawing.Point(12, 38)
         Me.dgv.Name = "dgv"
         Me.dgv.RowTemplate.Height = 21
-        Me.dgv.Size = New System.Drawing.Size(772, 397)
-        Me.dgv.TabIndex = 3
+        Me.dgv.Size = New System.Drawing.Size(776, 371)
+        Me.dgv.TabIndex = 1
         '
-        'col_ライブ日付
+        'col_出演者名
         '
-        Me.col_ライブ日付.HeaderText = "ライブ日付"
-        Me.col_ライブ日付.Name = "col_ライブ日付"
+        Me.col_出演者名.HeaderText = "出演者名"
+        Me.col_出演者名.Name = "col_出演者名"
+        Me.col_出演者名.Width = 200
         '
-        'col_ライブ名
+        'col_出演者カナ名
         '
-        Me.col_ライブ名.HeaderText = "ライブ名"
-        Me.col_ライブ名.Name = "col_ライブ名"
-        Me.col_ライブ名.Width = 300
+        Me.col_出演者カナ名.HeaderText = "出演者カナ名"
+        Me.col_出演者カナ名.Name = "col_出演者カナ名"
+        Me.col_出演者カナ名.Width = 200
         '
-        'col_ライブid
+        'col_出演者id
         '
-        Me.col_ライブid.HeaderText = "ライブid"
-        Me.col_ライブid.Name = "col_ライブid"
-        Me.col_ライブid.ReadOnly = True
-        Me.col_ライブid.Visible = False
+        Me.col_出演者id.HeaderText = "出演者id"
+        Me.col_出演者id.Name = "col_出演者id"
+        Me.col_出演者id.ReadOnly = True
+        Me.col_出演者id.Visible = False
         '
         'col_Flag
         '
@@ -91,20 +93,27 @@ Partial Class frmLive
         Me.col_Flag.ReadOnly = True
         Me.col_Flag.Visible = False
         '
-        'frmLive
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(12, 12)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(388, 20)
+        Me.ComboBox1.TabIndex = 0
+        '
+        'frmMusic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.dgv)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "frmLive"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "ライブ"
+        Me.Name = "frmMusic"
+        Me.Text = "楽曲"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -113,8 +122,9 @@ Partial Class frmLive
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnOK As Button
     Friend WithEvents dgv As DataGridView
-    Friend WithEvents col_ライブ日付 As DataGridViewTextBoxColumn
-    Friend WithEvents col_ライブ名 As DataGridViewTextBoxColumn
-    Friend WithEvents col_ライブid As DataGridViewTextBoxColumn
+    Friend WithEvents col_出演者名 As DataGridViewTextBoxColumn
+    Friend WithEvents col_出演者カナ名 As DataGridViewTextBoxColumn
+    Friend WithEvents col_出演者id As DataGridViewTextBoxColumn
     Friend WithEvents col_Flag As DataGridViewTextBoxColumn
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

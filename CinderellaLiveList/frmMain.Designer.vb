@@ -25,10 +25,12 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.btnSelectLive = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
+        Me.col_Song = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnLive = New System.Windows.Forms.Button()
         Me.btnPerson = New System.Windows.Forms.Button()
-        Me.col_Song = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblLive = New System.Windows.Forms.Label()
+        Me.btnPerformer = New System.Windows.Forms.Button()
+        Me.btnMusic = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,6 +58,12 @@ Partial Class frmMain
         Me.dgv.Size = New System.Drawing.Size(776, 368)
         Me.dgv.TabIndex = 1
         '
+        'col_Song
+        '
+        Me.col_Song.HeaderText = "Song"
+        Me.col_Song.Name = "col_Song"
+        Me.col_Song.ReadOnly = True
+        '
         'btnLive
         '
         Me.btnLive.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -73,14 +81,8 @@ Partial Class frmMain
         Me.btnPerson.Name = "btnPerson"
         Me.btnPerson.Size = New System.Drawing.Size(75, 23)
         Me.btnPerson.TabIndex = 3
-        Me.btnPerson.Text = "出演者"
+        Me.btnPerson.Text = "声優"
         Me.btnPerson.UseVisualStyleBackColor = True
-        '
-        'col_Song
-        '
-        Me.col_Song.HeaderText = "Song"
-        Me.col_Song.Name = "col_Song"
-        Me.col_Song.ReadOnly = True
         '
         'lblLive
         '
@@ -91,11 +93,33 @@ Partial Class frmMain
         Me.lblLive.TabIndex = 4
         Me.lblLive.Text = "選択中のライブ名"
         '
+        'btnPerformer
+        '
+        Me.btnPerformer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnPerformer.Location = New System.Drawing.Point(255, 415)
+        Me.btnPerformer.Name = "btnPerformer"
+        Me.btnPerformer.Size = New System.Drawing.Size(75, 23)
+        Me.btnPerformer.TabIndex = 5
+        Me.btnPerformer.Text = "出演者"
+        Me.btnPerformer.UseVisualStyleBackColor = True
+        '
+        'btnMusic
+        '
+        Me.btnMusic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnMusic.Location = New System.Drawing.Point(174, 415)
+        Me.btnMusic.Name = "btnMusic"
+        Me.btnMusic.Size = New System.Drawing.Size(75, 23)
+        Me.btnMusic.TabIndex = 6
+        Me.btnMusic.Text = "楽曲"
+        Me.btnMusic.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnMusic)
+        Me.Controls.Add(Me.btnPerformer)
         Me.Controls.Add(Me.lblLive)
         Me.Controls.Add(Me.btnPerson)
         Me.Controls.Add(Me.btnLive)
@@ -116,4 +140,6 @@ Partial Class frmMain
     Friend WithEvents btnPerson As Button
     Friend WithEvents col_Song As DataGridViewTextBoxColumn
     Friend WithEvents lblLive As Label
+    Friend WithEvents btnPerformer As Button
+    Friend WithEvents btnMusic As Button
 End Class

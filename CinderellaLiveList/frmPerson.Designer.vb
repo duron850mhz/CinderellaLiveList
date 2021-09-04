@@ -24,12 +24,13 @@ Partial Class frmPerson
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPerson))
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.col_出演者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_出演者カナ名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.col_出演者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者カナ名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者役名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -37,36 +38,12 @@ Partial Class frmPerson
         '
         Me.dgv.AllowUserToDeleteRows = False
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_出演者名, Me.col_出演者カナ名, Me.col_出演者id, Me.col_Flag})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_出演者名, Me.col_出演者カナ名, Me.col_出演者役名, Me.col_出演者id, Me.col_Flag})
         Me.dgv.Location = New System.Drawing.Point(16, 12)
         Me.dgv.Name = "dgv"
         Me.dgv.RowTemplate.Height = 21
         Me.dgv.Size = New System.Drawing.Size(772, 397)
         Me.dgv.TabIndex = 0
-        '
-        'col_出演者名
-        '
-        Me.col_出演者名.HeaderText = "出演者名"
-        Me.col_出演者名.Name = "col_出演者名"
-        '
-        'col_出演者カナ名
-        '
-        Me.col_出演者カナ名.HeaderText = "出演者カナ名"
-        Me.col_出演者カナ名.Name = "col_出演者カナ名"
-        '
-        'col_出演者id
-        '
-        Me.col_出演者id.HeaderText = "出演者id"
-        Me.col_出演者id.Name = "col_出演者id"
-        Me.col_出演者id.ReadOnly = True
-        Me.col_出演者id.Visible = False
-        '
-        'col_Flag
-        '
-        Me.col_Flag.HeaderText = "Flag"
-        Me.col_Flag.Name = "col_Flag"
-        Me.col_Flag.ReadOnly = True
-        Me.col_Flag.Visible = False
         '
         'btnOK
         '
@@ -90,6 +67,38 @@ Partial Class frmPerson
         Me.btnCancel.Text = "取消"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'col_出演者名
+        '
+        Me.col_出演者名.HeaderText = "出演者名"
+        Me.col_出演者名.Name = "col_出演者名"
+        Me.col_出演者名.Width = 200
+        '
+        'col_出演者カナ名
+        '
+        Me.col_出演者カナ名.HeaderText = "出演者カナ名"
+        Me.col_出演者カナ名.Name = "col_出演者カナ名"
+        Me.col_出演者カナ名.Width = 200
+        '
+        'col_出演者役名
+        '
+        Me.col_出演者役名.HeaderText = "出演者役名"
+        Me.col_出演者役名.Name = "col_出演者役名"
+        Me.col_出演者役名.Width = 200
+        '
+        'col_出演者id
+        '
+        Me.col_出演者id.HeaderText = "出演者id"
+        Me.col_出演者id.Name = "col_出演者id"
+        Me.col_出演者id.ReadOnly = True
+        Me.col_出演者id.Visible = False
+        '
+        'col_Flag
+        '
+        Me.col_Flag.HeaderText = "Flag"
+        Me.col_Flag.Name = "col_Flag"
+        Me.col_Flag.ReadOnly = True
+        Me.col_Flag.Visible = False
+        '
         'frmPerson
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -103,7 +112,7 @@ Partial Class frmPerson
         Me.Name = "frmPerson"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "出演者"
+        Me.Text = "声優"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -114,6 +123,7 @@ Partial Class frmPerson
     Friend WithEvents btnCancel As Button
     Friend WithEvents col_出演者名 As DataGridViewTextBoxColumn
     Friend WithEvents col_出演者カナ名 As DataGridViewTextBoxColumn
+    Friend WithEvents col_出演者役名 As DataGridViewTextBoxColumn
     Friend WithEvents col_出演者id As DataGridViewTextBoxColumn
     Friend WithEvents col_Flag As DataGridViewTextBoxColumn
 End Class

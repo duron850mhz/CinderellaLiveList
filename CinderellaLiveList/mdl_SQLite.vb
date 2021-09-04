@@ -30,22 +30,23 @@
              "drop table if exists 楽曲テーブル;" &
              "drop table if exists 出演者テーブル;" &
              "drop table if exists 出演者詳細テーブル;" &
-             "create table ライブテーブル(" &
-                "ライブid integer primary key autoincrement," &
-                "ライブ名 text," &
-                "ライブ日付 text);" &
-             "create table 楽曲テーブル(" &
-                "楽曲id integer primary key autoincrement," &
-                "ライブid integer," &
-                "楽曲名 text);" &
-             "create table 出演者テーブル(" &
-                "出演者id integer primary key autoincrement," &
-                "出演者名 text," &
-                "出演者カナ名 text);" &
-             "create table 出演者詳細テーブル(" &
-                "出演者詳細id integer primary key autoincrement," &
-                "出演者id integer," &
-                "楽曲id integer);"
+             "CREATE TABLE [ライブテーブル] (" &
+                "[ライブid] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[ライブ名] TEXT," &
+                "[ライブ日付] TEXT;" &
+             "CREATE TABLE [楽曲テーブル] (" &
+                "[楽曲id] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[楽曲名] TEXT);" &
+             "CREATE TABLE [出演者テーブル] (" &
+                "[出演者id] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[出演者名] TEXT," &
+                "[出演者カナ名] TEXT," &
+                "[出演者役名] TEXT);" &
+             "CREATE TABLE [出演者詳細テーブル] (" &
+                "[出演者詳細id] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[出演者id] INTEGER REFERENCES [出演者テーブル]([出演者id]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[楽曲id] INTEGER REFERENCES [楽曲テーブル]([楽曲id]) ON DELETE CASCADE ON UPDATE CASCADE);"
 
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()

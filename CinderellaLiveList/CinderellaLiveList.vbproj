@@ -123,6 +123,18 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMusic.Designer.vb">
+      <DependentUpon>frmMusic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMusic.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPerformer.Designer.vb">
+      <DependentUpon>frmPerformer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPerformer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPerson.Designer.vb">
       <DependentUpon>frmPerson.vb</DependentUpon>
     </Compile>
@@ -153,6 +165,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMusic.resx">
+      <DependentUpon>frmMusic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPerformer.resx">
+      <DependentUpon>frmPerformer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPerson.resx">
       <DependentUpon>frmPerson.vb</DependentUpon>
