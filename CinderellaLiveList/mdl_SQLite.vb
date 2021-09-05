@@ -37,6 +37,7 @@
              "CREATE TABLE [楽曲テーブル] (" &
                 "[楽曲id] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[曲順] INTEGER," &
                 "[楽曲名] TEXT);" &
              "CREATE TABLE [出演者テーブル] (" &
                 "[出演者id] INTEGER PRIMARY KEY AUTOINCREMENT," &

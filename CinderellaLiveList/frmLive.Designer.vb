@@ -58,6 +58,9 @@ Partial Class frmLive
         'dgv
         '
         Me.dgv.AllowUserToDeleteRows = False
+        Me.dgv.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_ライブ日付, Me.col_ライブ名, Me.col_ライブid, Me.col_Flag})
         Me.dgv.Location = New System.Drawing.Point(12, 12)

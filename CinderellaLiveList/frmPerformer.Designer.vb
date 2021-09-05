@@ -26,11 +26,11 @@ Partial Class frmPerformer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.col_出演者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_出演 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_Flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,6 +59,9 @@ Partial Class frmPerformer
         'dgv
         '
         Me.dgv.AllowUserToDeleteRows = False
+        Me.dgv.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_出演者名, Me.col_出演, Me.col_出演者id, Me.col_Flag})
         Me.dgv.Location = New System.Drawing.Point(12, 38)
@@ -66,6 +69,14 @@ Partial Class frmPerformer
         Me.dgv.RowTemplate.Height = 21
         Me.dgv.Size = New System.Drawing.Size(776, 371)
         Me.dgv.TabIndex = 3
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(12, 12)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(445, 20)
+        Me.ComboBox1.TabIndex = 6
         '
         'col_出演者名
         '
@@ -79,7 +90,7 @@ Partial Class frmPerformer
         Me.col_出演.Name = "col_出演"
         Me.col_出演.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.col_出演.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.col_出演.Width = 200
+        Me.col_出演.Width = 60
         '
         'col_出演者id
         '
@@ -95,14 +106,6 @@ Partial Class frmPerformer
         Me.col_Flag.ReadOnly = True
         Me.col_Flag.Visible = False
         '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(12, 12)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(445, 20)
-        Me.ComboBox1.TabIndex = 6
-        '
         'frmPerformer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -114,6 +117,8 @@ Partial Class frmPerformer
         Me.Controls.Add(Me.dgv)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPerformer"
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "出演者"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -123,9 +128,9 @@ Partial Class frmPerformer
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnOK As Button
     Friend WithEvents dgv As DataGridView
+    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents col_出演者名 As DataGridViewTextBoxColumn
     Friend WithEvents col_出演 As DataGridViewCheckBoxColumn
     Friend WithEvents col_出演者id As DataGridViewTextBoxColumn
     Friend WithEvents col_Flag As DataGridViewTextBoxColumn
-    Friend WithEvents ComboBox1 As ComboBox
 End Class

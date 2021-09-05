@@ -26,11 +26,10 @@ Partial Class frmMusic
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.col_出演者名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_出演者カナ名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbLive = New System.Windows.Forms.ComboBox()
+        Me.col_曲順 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_楽曲名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_楽曲id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,47 +58,44 @@ Partial Class frmMusic
         'dgv
         '
         Me.dgv.AllowUserToDeleteRows = False
+        Me.dgv.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_出演者名, Me.col_出演者カナ名, Me.col_出演者id, Me.col_Flag})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_曲順, Me.col_楽曲名, Me.col_楽曲id})
         Me.dgv.Location = New System.Drawing.Point(12, 38)
         Me.dgv.Name = "dgv"
         Me.dgv.RowTemplate.Height = 21
         Me.dgv.Size = New System.Drawing.Size(776, 371)
         Me.dgv.TabIndex = 1
         '
-        'col_出演者名
+        'cmbLive
         '
-        Me.col_出演者名.HeaderText = "出演者名"
-        Me.col_出演者名.Name = "col_出演者名"
-        Me.col_出演者名.Width = 200
+        Me.cmbLive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLive.FormattingEnabled = True
+        Me.cmbLive.Location = New System.Drawing.Point(12, 12)
+        Me.cmbLive.Name = "cmbLive"
+        Me.cmbLive.Size = New System.Drawing.Size(388, 20)
+        Me.cmbLive.TabIndex = 0
         '
-        'col_出演者カナ名
+        'col_曲順
         '
-        Me.col_出演者カナ名.HeaderText = "出演者カナ名"
-        Me.col_出演者カナ名.Name = "col_出演者カナ名"
-        Me.col_出演者カナ名.Width = 200
+        Me.col_曲順.HeaderText = "曲順"
+        Me.col_曲順.Name = "col_曲順"
+        Me.col_曲順.Width = 60
         '
-        'col_出演者id
+        'col_楽曲名
         '
-        Me.col_出演者id.HeaderText = "出演者id"
-        Me.col_出演者id.Name = "col_出演者id"
-        Me.col_出演者id.ReadOnly = True
-        Me.col_出演者id.Visible = False
+        Me.col_楽曲名.HeaderText = "楽曲名"
+        Me.col_楽曲名.Name = "col_楽曲名"
+        Me.col_楽曲名.Width = 400
         '
-        'col_Flag
+        'col_楽曲id
         '
-        Me.col_Flag.HeaderText = "Flag"
-        Me.col_Flag.Name = "col_Flag"
-        Me.col_Flag.ReadOnly = True
-        Me.col_Flag.Visible = False
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(12, 12)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(388, 20)
-        Me.ComboBox1.TabIndex = 0
+        Me.col_楽曲id.HeaderText = "楽曲id"
+        Me.col_楽曲id.Name = "col_楽曲id"
+        Me.col_楽曲id.ReadOnly = True
+        Me.col_楽曲id.Visible = False
         '
         'frmMusic
         '
@@ -107,12 +103,14 @@ Partial Class frmMusic
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cmbLive)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.dgv)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMusic"
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "楽曲"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -122,9 +120,8 @@ Partial Class frmMusic
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnOK As Button
     Friend WithEvents dgv As DataGridView
-    Friend WithEvents col_出演者名 As DataGridViewTextBoxColumn
-    Friend WithEvents col_出演者カナ名 As DataGridViewTextBoxColumn
-    Friend WithEvents col_出演者id As DataGridViewTextBoxColumn
-    Friend WithEvents col_Flag As DataGridViewTextBoxColumn
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbLive As ComboBox
+    Friend WithEvents col_曲順 As DataGridViewTextBoxColumn
+    Friend WithEvents col_楽曲名 As DataGridViewTextBoxColumn
+    Friend WithEvents col_楽曲id As DataGridViewTextBoxColumn
 End Class

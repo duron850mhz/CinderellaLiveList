@@ -38,7 +38,7 @@ Public Class frmPerson
                 dgv.Rows.Clear()
 
                 Try
-                    Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
+                    Using cn As New SQLiteConnection(DB_CS_SQLite)
                         cn.Open()
                         Using cmd As New SQLite.SQLiteCommand
                             cmd.Connection = cn
@@ -67,7 +67,7 @@ Public Class frmPerson
             Case 1
                 '書き込み
                 Try
-                    Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
+                    Using cn As New SQLiteConnection(DB_CS_SQLite)
                         cn.Open()
                         Dim tran As SQLite.SQLiteTransaction = cn.BeginTransaction
                         Using cmd As New SQLite.SQLiteCommand
