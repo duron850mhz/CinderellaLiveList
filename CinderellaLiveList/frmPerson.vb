@@ -21,6 +21,8 @@ Public Class frmPerson
 
         'SQLite初期化
         C_SQLiteInitialize()
+
+        '
     End Sub
 
     ''' <summary>
@@ -42,16 +44,16 @@ Public Class frmPerson
                         cn.Open()
                         Using cmd As New SQLite.SQLiteCommand
                             cmd.Connection = cn
-                            cmd.CommandText = "select * from 出演者テーブル" &
-                                              " order by 出演者カナ名"
+                            cmd.CommandText = "select * from 声優テーブル" &
+                                              " order by 声優カナ名"
                             Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
                             Do While reader.Read
                                 Dim iRow As Integer = dgv.RowCount
                                 dgv.Rows.Add()
-                                dgv.Rows(iRow).Cells(col_出演者名.Index).Value = reader("出演者名")
-                                dgv.Rows(iRow).Cells(col_出演者カナ名.Index).Value = reader("出演者カナ名")
-                                dgv.Rows(iRow).Cells(col_出演者役名.Index).Value = reader("出演者役名")
-                                dgv.Rows(iRow).Cells(col_出演者id.Index).Value = reader("出演者id")
+                                dgv.Rows(iRow).Cells(col_声優名.Index).Value = reader("声優名")
+                                dgv.Rows(iRow).Cells(col_声優カナ名.Index).Value = reader("声優カナ名")
+                                dgv.Rows(iRow).Cells(col_声優役名.Index).Value = reader("声優役名")
+                                dgv.Rows(iRow).Cells(col_声優id.Index).Value = reader("声優id")
                                 dgv.Rows(iRow).Cells(col_Flag.Index).Value = ""
                             Loop
                             reader.Close()
@@ -76,24 +78,24 @@ Public Class frmPerson
                                 If dgv.Rows(ii).Cells(col_Flag.Index).Value <> "" Then
                                     Dim htParm As New Hashtable
                                     Dim strRet As String = ""
-                                    htParm("出演者名") = dgv.Rows(ii).Cells(col_出演者名.Index).Value
-                                    htParm("出演者カナ名") = dgv.Rows(ii).Cells(col_出演者カナ名.Index).Value
-                                    htParm("出演者役名") = dgv.Rows(ii).Cells(col_出演者名.Index).Value
-                                    Dim iID As Integer = Val(dgv.Rows(ii).Cells(col_出演者id.Index).Value)
+                                    htParm("声優名") = dgv.Rows(ii).Cells(col_声優名.Index).Value
+                                    htParm("声優カナ名") = dgv.Rows(ii).Cells(col_声優カナ名.Index).Value
+                                    htParm("声優役名") = dgv.Rows(ii).Cells(col_声優名.Index).Value
+                                    Dim iID As Integer = Val(dgv.Rows(ii).Cells(col_声優id.Index).Value)
 
                                     If iID = 0 Then
                                         '---< 追加 >---
-                                        If htParm("出演者名") <> "" Then
-                                            strRet = C_CommandInsert("出演者テーブル", htParm, cmd)
+                                        If htParm("声優名") <> "" Then
+                                            strRet = C_CommandInsert("声優テーブル", htParm, cmd)
                                         End If
                                     Else
-                                        If htParm("出演者名") <> "" Then
+                                        If htParm("声優名") <> "" Then
                                             '---< 更新 >---
-                                            strRet = C_CommandUpdate("出演者テーブル", htParm, cmd, " where 出演者id = " & iID.ToString)
+                                            strRet = C_CommandUpdate("声優テーブル", htParm, cmd, " where 声優id = " & iID.ToString)
                                         Else
                                             '---< 削除 >---
-                                            cmd.CommandText = "delete from 出演者テーブル" &
-                                                              " where 出演者id = " & iID.ToString
+                                            cmd.CommandText = "delete from 声優テーブル" &
+                                                              " where 声優id = " & iID.ToString
                                             cmd.ExecuteNonQuery()
                                         End If
                                     End If

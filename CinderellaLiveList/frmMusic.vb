@@ -45,7 +45,7 @@ Public Class frmMusic
     End Sub
 
     ''' <summary>
-    ''' 読み書き
+    ''' 読み
     ''' </summary>
     Private Sub I_DataSet()
         LG_bSetbyProg = True
@@ -100,6 +100,10 @@ Public Class frmMusic
             If LG_cn.State = ConnectionState.Open Then
                 LG_tran.Commit()
             End If
+        Else
+            If LG_cn.State = ConnectionState.Open Then
+                LG_tran.Rollback()
+            End If
         End If
     End Sub
 
@@ -123,17 +127,23 @@ Public Class frmMusic
                     '---< 追加 >---
                     If htParm("楽曲名") <> "" Then
                         strRet = C_CommandInsert("楽曲テーブル", htParm, cmd)
+                        If strRet <> "" Then
+                            Throw New Exception(strRet)
+                        Else
+                            cmd.CommandText = "select seq from sqlite_sequence where name='楽曲テーブル'"
+                            dgv.Rows(e.RowIndex).Cells(col_楽曲id.Index).Value = cmd.ExecuteScalar
+                        End If
                     End If
                 Else
                     If htParm("楽曲名") <> "" Then
                         '---< 更新 >---
                         strRet = C_CommandUpdate("楽曲テーブル", htParm, cmd, " where 楽曲id = " & iID.ToString)
+                        If strRet <> "" Then
+                            Throw New Exception(strRet)
+                        End If
                     End If
                 End If
 
-                If strRet <> "" Then
-                    Throw New Exception(strRet)
-                End If
             End Using
         Catch ex As Exception
             MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
