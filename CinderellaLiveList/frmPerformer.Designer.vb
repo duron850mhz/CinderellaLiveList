@@ -26,11 +26,11 @@ Partial Class frmPerformer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.cmbLive = New System.Windows.Forms.ComboBox()
         Me.col_声優名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_出演 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.col_声優id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_出演者id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmbLive = New System.Windows.Forms.ComboBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -71,14 +71,6 @@ Partial Class frmPerformer
         Me.dgv.Size = New System.Drawing.Size(776, 371)
         Me.dgv.TabIndex = 3
         '
-        'cmbLive
-        '
-        Me.cmbLive.FormattingEnabled = True
-        Me.cmbLive.Location = New System.Drawing.Point(12, 12)
-        Me.cmbLive.Name = "cmbLive"
-        Me.cmbLive.Size = New System.Drawing.Size(445, 20)
-        Me.cmbLive.TabIndex = 6
-        '
         'col_声優名
         '
         Me.col_声優名.HeaderText = "声優名"
@@ -107,6 +99,15 @@ Partial Class frmPerformer
         Me.col_出演者id.Name = "col_出演者id"
         Me.col_出演者id.ReadOnly = True
         Me.col_出演者id.Visible = False
+        '
+        'cmbLive
+        '
+        Me.cmbLive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLive.FormattingEnabled = True
+        Me.cmbLive.Location = New System.Drawing.Point(12, 12)
+        Me.cmbLive.Name = "cmbLive"
+        Me.cmbLive.Size = New System.Drawing.Size(445, 20)
+        Me.cmbLive.TabIndex = 6
         '
         'frmPerformer
         '

@@ -62,6 +62,8 @@
                 " ('WONDERFUL M@GIC!! Day1','2014/04/05')," &
                 " ('WONDERFUL M@GIC!! Day2','2014/04/06')," &
                 " ('PARTY M@GIC!!','2014/11/30')," &
+                " ('SUMMER FESTIV@L 2015 東京','2015/08/02')," &
+                " ('SUMMER FESTIV@L 2015 大阪','2015/08/23')," &
                 " ('シンデレラの舞踏会 -Power of Smile- Day1','2015/11/28')," &
                 " ('シンデレラの舞踏会 -Power of Smile- Day2','2015/11/29')," &
                 " ('TriCastle Story 神戸 Day1','2016/09/03')," &
@@ -82,8 +84,6 @@
                 " ('Serendipity Parade!!! 福岡 Day2','2017/07/30')," &
                 " ('Serendipity Parade!!! SSA Day1','2017/08/12')," &
                 " ('Serendipity Parade!!! SSA Day2','2017/08/13')," &
-                " ('SUMMER FESTIV@L 2015 東京','2015/08/02')," &
-                " ('SUMMER FESTIV@L 2015 大阪','2015/08/23')," &
                 " ('すぷりんぐふぇすてぃばる2018 Day1','2018/03/03')," &
                 " ('すぷりんぐふぇすてぃばる2018 Day2','2018/03/04')," &
                 " ('Initial Mess@ge Day1','2018/04/07')," &
@@ -101,6 +101,7 @@
                 " ('Special 3chord♪ Funky Dancing! Day2','2019/11/10')," &
                 " ('Special 3chord♪ Glowing Rock! Day1','2020/02/15')," &
                 " ('Special 3chord♪ Glowing Rock! Day2','2020/02/16')," &
+                " ('Live Broadcast 24magic ～シンデレラたちの24時間生放送！～','2020/09/05')," &
                 " ('Broadcast & LIVE Happy New Yell !!! Day1','2021/01/09')," &
                 " ('Broadcast & LIVE Happy New Yell !!! Day2','2021/01/10')," &
                 " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day1','2021/10/02')," &

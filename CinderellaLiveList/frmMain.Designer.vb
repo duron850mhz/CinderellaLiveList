@@ -23,25 +23,16 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.btnSelectLive = New System.Windows.Forms.Button()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.col_Song = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnLive = New System.Windows.Forms.Button()
         Me.btnPerson = New System.Windows.Forms.Button()
-        Me.lblLive = New System.Windows.Forms.Label()
         Me.btnPerformer = New System.Windows.Forms.Button()
         Me.btnMusic = New System.Windows.Forms.Button()
+        Me.cmbLive = New System.Windows.Forms.ComboBox()
+        Me.col_楽曲名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_楽曲id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'btnSelectLive
-        '
-        Me.btnSelectLive.Location = New System.Drawing.Point(12, 12)
-        Me.btnSelectLive.Name = "btnSelectLive"
-        Me.btnSelectLive.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelectLive.TabIndex = 0
-        Me.btnSelectLive.Text = "ライブ選択"
-        Me.btnSelectLive.UseVisualStyleBackColor = True
         '
         'dgv
         '
@@ -51,18 +42,12 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_Song})
-        Me.dgv.Location = New System.Drawing.Point(12, 41)
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_楽曲名, Me.col_楽曲id})
+        Me.dgv.Location = New System.Drawing.Point(12, 38)
         Me.dgv.Name = "dgv"
         Me.dgv.RowTemplate.Height = 21
-        Me.dgv.Size = New System.Drawing.Size(776, 368)
+        Me.dgv.Size = New System.Drawing.Size(776, 371)
         Me.dgv.TabIndex = 1
-        '
-        'col_Song
-        '
-        Me.col_Song.HeaderText = "Song"
-        Me.col_Song.Name = "col_Song"
-        Me.col_Song.ReadOnly = True
         '
         'btnLive
         '
@@ -84,15 +69,6 @@ Partial Class frmMain
         Me.btnPerson.Text = "声優"
         Me.btnPerson.UseVisualStyleBackColor = True
         '
-        'lblLive
-        '
-        Me.lblLive.AutoSize = True
-        Me.lblLive.Location = New System.Drawing.Point(93, 17)
-        Me.lblLive.Name = "lblLive"
-        Me.lblLive.Size = New System.Drawing.Size(89, 12)
-        Me.lblLive.TabIndex = 4
-        Me.lblLive.Text = "選択中のライブ名"
-        '
         'btnPerformer
         '
         Me.btnPerformer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -113,33 +89,52 @@ Partial Class frmMain
         Me.btnMusic.Text = "楽曲"
         Me.btnMusic.UseVisualStyleBackColor = True
         '
+        'cmbLive
+        '
+        Me.cmbLive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLive.FormattingEnabled = True
+        Me.cmbLive.Location = New System.Drawing.Point(12, 12)
+        Me.cmbLive.Name = "cmbLive"
+        Me.cmbLive.Size = New System.Drawing.Size(445, 20)
+        Me.cmbLive.TabIndex = 7
+        '
+        'col_楽曲名
+        '
+        Me.col_楽曲名.HeaderText = "楽曲名"
+        Me.col_楽曲名.Name = "col_楽曲名"
+        Me.col_楽曲名.ReadOnly = True
+        '
+        'col_楽曲id
+        '
+        Me.col_楽曲id.HeaderText = "楽曲id"
+        Me.col_楽曲id.Name = "col_楽曲id"
+        Me.col_楽曲id.ReadOnly = True
+        Me.col_楽曲id.Visible = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.cmbLive)
         Me.Controls.Add(Me.btnMusic)
         Me.Controls.Add(Me.btnPerformer)
-        Me.Controls.Add(Me.lblLive)
         Me.Controls.Add(Me.btnPerson)
         Me.Controls.Add(Me.btnLive)
         Me.Controls.Add(Me.dgv)
-        Me.Controls.Add(Me.btnSelectLive)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMain"
         Me.Text = "メイン"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnSelectLive As Button
     Friend WithEvents dgv As DataGridView
     Friend WithEvents btnLive As Button
     Friend WithEvents btnPerson As Button
-    Friend WithEvents col_Song As DataGridViewTextBoxColumn
-    Friend WithEvents lblLive As Label
     Friend WithEvents btnPerformer As Button
     Friend WithEvents btnMusic As Button
+    Friend WithEvents cmbLive As ComboBox
+    Friend WithEvents col_楽曲名 As DataGridViewTextBoxColumn
+    Friend WithEvents col_楽曲id As DataGridViewTextBoxColumn
 End Class
