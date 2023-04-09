@@ -105,7 +105,19 @@
                 " ('Broadcast & LIVE Happy New Yell !!! Day1','2021/01/09')," &
                 " ('Broadcast & LIVE Happy New Yell !!! Day2','2021/01/10')," &
                 " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day1','2021/10/02')," &
-                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day2','2021/10/03')"
+                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day2','2021/10/03')" &
+                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day1','2021/11/27')" &
+                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day2','2021/11/28')" &
+                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day1','2021/12/25')," &
+                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day2','2021/12/26')" &
+                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day1','2022/01/29')" &
+                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day2','2022/01/30')" &
+                " ('M@GICAL WONDERLAND!!! Day1','2022/04/02')" &
+                " ('M@GICAL WONDERLAND!!! Day2','2022/04/03')" &
+                " ('LIKE4LIVE #cg_ootd Day1','2022/09/03')" &
+                " ('LIKE4LIVE #cg_ootd Day2','2022/09/04')" &
+                " ('Twinkle LIVE Constellation Gradation Day1','2022/11/26')" &
+                " ('Twinkle LIVE Constellation Gradation Day2','2022/11/27')"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
 
@@ -179,6 +191,7 @@
                 " ('花守ゆみり','はなもりゆみり','佐藤心')," &
                 " ('早見沙織','はやみさおり','高垣楓')," &
                 " ('原紗友里','はらさゆり','本田未央')," &
+                " ('原涼子','はらすずこ','望月聖')" &
                 " ('原田彩楓','はらださやか','三船美優')," &
                 " ('原田ひとみ','はらだひとみ','十時愛梨')," &
                 " ('原優子','はらゆうこ','向井拓海')," &
