@@ -11,6 +11,7 @@
 
         If System.IO.File.Exists(strDBPath) = False Then
             C_SQLiteInitTable()
+            C_GetData()
         End If
     End Sub
 
@@ -34,7 +35,8 @@
              "CREATE TABLE [ライブテーブル] (" &
                 "[ライブid] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[ライブ名] TEXT," &
-                "[ライブ日付] TEXT);" &
+                "[ライブ日付] TEXT," &
+                "[ライブデータ] TEXT);" &
              "CREATE TABLE [楽曲テーブル] (" &
                 "[楽曲id] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
@@ -57,67 +59,68 @@
             cmd.ExecuteNonQuery()
 
             strSQL = "insert into ライブテーブル" &
-                " (ライブ名,ライブ日付)" &
+                " (ライブ名,ライブデータ)" &
                 " values" &
-                " ('WONDERFUL M@GIC!! Day1','2014/04/05')," &
-                " ('WONDERFUL M@GIC!! Day2','2014/04/06')," &
-                " ('PARTY M@GIC!!','2014/11/30')," &
-                " ('SUMMER FESTIV@L 2015 東京','2015/08/02')," &
-                " ('SUMMER FESTIV@L 2015 大阪','2015/08/23')," &
-                " ('シンデレラの舞踏会 -Power of Smile- Day1','2015/11/28')," &
-                " ('シンデレラの舞踏会 -Power of Smile- Day2','2015/11/29')," &
-                " ('TriCastle Story 神戸 Day1','2016/09/03')," &
-                " ('TriCastle Story 神戸 Day2','2016/09/04')," &
-                " ('TriCastle Story SSA Day1','2016/10/15')," &
-                " ('TriCastle Story SSA Day2','2016/10/16')," &
-                " ('Serendipity Parade!!! 宮城 Day1','2017/05/13')," &
-                " ('Serendipity Parade!!! 宮城 Day2','2017/05/14')," &
-                " ('Serendipity Parade!!! 石川 Day1','2017/05/27')," &
-                " ('Serendipity Parade!!! 石川 Day2','2017/05/28')," &
-                " ('Serendipity Parade!!! 大阪 Day1','2017/06/09')," &
-                " ('Serendipity Parade!!! 大阪 Day2','2017/06/10')," &
-                " ('Serendipity Parade!!! 静岡 Day1','2017/06/24')," &
-                " ('Serendipity Parade!!! 静岡 Day2','2017/06/25')," &
-                " ('Serendipity Parade!!! 幕張 Day1','2017/07/08')," &
-                " ('Serendipity Parade!!! 幕張 Day2','2017/07/09')," &
-                " ('Serendipity Parade!!! 福岡 Day1','2017/07/29')," &
-                " ('Serendipity Parade!!! 福岡 Day2','2017/07/30')," &
-                " ('Serendipity Parade!!! SSA Day1','2017/08/12')," &
-                " ('Serendipity Parade!!! SSA Day2','2017/08/13')," &
-                " ('すぷりんぐふぇすてぃばる2018 Day1','2018/03/03')," &
-                " ('すぷりんぐふぇすてぃばる2018 Day2','2018/03/04')," &
-                " ('Initial Mess@ge Day1','2018/04/07')," &
-                " ('Initial Mess@ge Day2','2018/04/08')," &
-                " ('SS3A Live Sound Booth♪ Day1','2018/09/08')," &
-                " ('SS3A Live Sound Booth♪ Day2','2018/09/09')," &
-                " ('MERRY-GO-ROUNDOME!!! メットライフドーム Day1','2018/11/10')," &
-                " ('MERRY-GO-ROUNDOME!!! メットライフドーム Day2','2018/11/11')," &
-                " ('MERRY-GO-ROUNDOME!!! ナゴヤドーム Day1','2018/12/01')," &
-                " ('MERRY-GO-ROUNDOME!!! ナゴヤドーム Day2','2018/12/02')," &
-                " ('プロデューサーさん感謝祭 in 新木場スタジオコースト','2019/06/16')," &
-                " ('Special 3chord♪ Comical Pops! Day1','2019/09/03')," &
-                " ('Special 3chord♪ Comical Pops! Day2','2019/09/04')," &
-                " ('Special 3chord♪ Funky Dancing! Day1','2019/11/09')," &
-                " ('Special 3chord♪ Funky Dancing! Day2','2019/11/10')," &
-                " ('Special 3chord♪ Glowing Rock! Day1','2020/02/15')," &
-                " ('Special 3chord♪ Glowing Rock! Day2','2020/02/16')," &
-                " ('Live Broadcast 24magic ～シンデレラたちの24時間生放送！～','2020/09/05')," &
-                " ('Broadcast & LIVE Happy New Yell !!! Day1','2021/01/09')," &
-                " ('Broadcast & LIVE Happy New Yell !!! Day2','2021/01/10')," &
-                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day1','2021/10/02')," &
-                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day2','2021/10/03')" &
-                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day1','2021/11/27')" &
-                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day2','2021/11/28')" &
-                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day1','2021/12/25')," &
-                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day2','2021/12/26')" &
-                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day1','2022/01/29')" &
-                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day2','2022/01/30')" &
-                " ('M@GICAL WONDERLAND!!! Day1','2022/04/02')" &
-                " ('M@GICAL WONDERLAND!!! Day2','2022/04/03')" &
-                " ('LIKE4LIVE #cg_ootd Day1','2022/09/03')" &
-                " ('LIKE4LIVE #cg_ootd Day2','2022/09/04')" &
-                " ('Twinkle LIVE Constellation Gradation Day1','2022/11/26')" &
-                " ('Twinkle LIVE Constellation Gradation Day2','2022/11/27')"
+                " ('「アイドルマスター シンデレラガールズ『デレラジ』」スペシャルステージ','https://imas-db.jp/song/event/wf2013w.html')," &
+                " ('リスアニ！LIVE4 アイドルマスターシンデレラガールズ','https://imas-db.jp/song/event/lisani_live4.html')," &
+                " ('WONDERFUL M@GIC!! Day1','https://imas-db.jp/song/event/cinderella1st0405.html')," &
+                " ('WONDERFUL M@GIC!! Day2','https://imas-db.jp/song/event/cinderella1st0406.html')," &
+                " ('PARTY M@GIC!!','https://imas-db.jp/song/event/cinderella2nd.html')," &
+                " ('SUMMER FESTIV@L 2015 東京','https://imas-db.jp/song/event/cinderella_20150802.html')," &
+                " ('SUMMER FESTIV@L 2015 大阪','https://imas-db.jp/song/event/cinderella_20150823.html')," &
+                " ('シンデレラの舞踏会 -Power of Smile- Day1','https://imas-db.jp/song/event/cinderella3rd1128.html')," &
+                " ('シンデレラの舞踏会 -Power of Smile- Day2','2https://imas-db.jp/song/event/cinderella3rd1129.html')," &
+                " ('TriCastle Story 神戸 Day1','https://imas-db.jp/song/event/cinderella4th0903.html')," &
+                " ('TriCastle Story 神戸 Day2','https://imas-db.jp/song/event/cinderella4th0904.html')," &
+                " ('TriCastle Story SSA Day1','https://imas-db.jp/song/event/cinderella4th1015.html')," &
+                " ('TriCastle Story SSA Day2','https://imas-db.jp/song/event/cinderella4th1016.html')," &
+                " ('Serendipity Parade!!! 宮城 Day1','https://imas-db.jp/song/event/cinderella5th0513.html')," &
+                " ('Serendipity Parade!!! 宮城 Day2','https://imas-db.jp/song/event/cinderella5th0513.html')," &
+                " ('Serendipity Parade!!! 石川 Day1','https://imas-db.jp/song/event/cinderella5th0527.html')," &
+                " ('Serendipity Parade!!! 石川 Day2','https://imas-db.jp/song/event/cinderella5th0528.html')," &
+                " ('Serendipity Parade!!! 大阪 Day1','https://imas-db.jp/song/event/cinderella5th0609.html')," &
+                " ('Serendipity Parade!!! 大阪 Day2','https://imas-db.jp/song/event/cinderella5th0610.html')," &
+                " ('Serendipity Parade!!! 静岡 Day1','https://imas-db.jp/song/event/cinderella5th0624.html')," &
+                " ('Serendipity Parade!!! 静岡 Day2','https://imas-db.jp/song/event/cinderella5th0624.html')," &
+                " ('Serendipity Parade!!! 幕張 Day1','https://imas-db.jp/song/event/cinderella5th0708.html')," &
+                " ('Serendipity Parade!!! 幕張 Day2','https://imas-db.jp/song/event/cinderella5th0708.html')," &
+                " ('Serendipity Parade!!! 福岡 Day1','https://imas-db.jp/song/event/cinderella5th0729.html')," &
+                " ('Serendipity Parade!!! 福岡 Day2','https://imas-db.jp/song/event/cinderella5th0729.html')," &
+                " ('Serendipity Parade!!! SSA Day1','https://imas-db.jp/song/event/cinderella5th0812.html')," &
+                " ('Serendipity Parade!!! SSA Day2','https://imas-db.jp/song/event/cinderella5th0813.html')," &
+                " ('すぷりんぐふぇすてぃばる2018 Day1','https://imas-db.jp/song/event/cingeki_20180303.html')," &
+                " ('すぷりんぐふぇすてぃばる2018 Day2','https://imas-db.jp/song/event/cingeki_20180304.html')," &
+                " ('Initial Mess@ge Day1','https://imas-db.jp/song/event/cinderella_tw0407.html')," &
+                " ('Initial Mess@ge Day2','https://imas-db.jp/song/event/cinderella_tw0408.html')," &
+                " ('SS3A Live Sound Booth♪ Day1','https://imas-db.jp/song/event/cinderella_ss3a_day1.html')," &
+                " ('SS3A Live Sound Booth♪ Day2','https://imas-db.jp/song/event/cinderella_ss3a_day2.html')," &
+                " ('MERRY-GO-ROUNDOME!!! メットライフドーム Day1','https://imas-db.jp/song/event/cinderella6th1110.html')," &
+                " ('MERRY-GO-ROUNDOME!!! メットライフドーム Day2','https://imas-db.jp/song/event/cinderella6th1111.html')," &
+                " ('MERRY-GO-ROUNDOME!!! ナゴヤドーム Day1','https://imas-db.jp/song/event/cinderella6th1201.html')," &
+                " ('MERRY-GO-ROUNDOME!!! ナゴヤドーム Day2','https://imas-db.jp/song/event/cinderella6th1202.html')," &
+                " ('プロデューサーさん感謝祭 in 新木場スタジオコースト','https://imas-db.jp/song/event/cinderella2019fes.html')," &
+                " ('Special 3chord♪ Comical Pops! Day1','https://imas-db.jp/song/event/cinderella7th0903.html')," &
+                " ('Special 3chord♪ Comical Pops! Day2','https://imas-db.jp/song/event/cinderella7th0904.html')," &
+                " ('Special 3chord♪ Funky Dancing! Day1','https://imas-db.jp/song/event/cinderella7th1109.html')," &
+                " ('Special 3chord♪ Funky Dancing! Day2','https://imas-db.jp/song/event/cinderella7th1110.html')," &
+                " ('Special 3chord♪ Glowing Rock! Day1','https://imas-db.jp/song/event/cinderella7th0215.html')," &
+                " ('Special 3chord♪ Glowing Rock! Day2','https://imas-db.jp/song/event/cinderella7th0216.html')," &
+                " ('Broadcast & LIVE Happy New Yell !!! Day1','https://imas-db.jp/song/event/cinderella_hny0109.html')," &
+                " ('Broadcast & LIVE Happy New Yell !!! Day2','https://imas-db.jp/song/event/cinderella_hny0110.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day1','https://imas-db.jp/song/event/cinderella10th_fukuoka_day1.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! MerryMaerchen Land Day2','https://imas-db.jp/song/event/cinderella10th_fukuoka_day2.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day1','https://imas-db.jp/song/event/cinderella10th_chiba_day1.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! Celebration Land Day2','https://imas-db.jp/song/event/cinderella10th_chiba_day2.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day1','https://imas-db.jp/song/event/cinderella10th_aichi_day1.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! CosmoStar Land Day2','https://imas-db.jp/song/event/cinderella10th_aichi_day2.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day1','https://imas-db.jp/song/event/cinderella10th_okinawa_day1.html')," &
+                " ('M@GICAL WONDERLAND TOUR!!! Tropical Land Day2','https://imas-db.jp/song/event/cinderella10th_okinawa_day2.html')," &
+                " ('M@GICAL WONDERLAND!!! Day1','https://imas-db.jp/song/event/cinderella10th_final_day1.html')," &
+                " ('M@GICAL WONDERLAND!!! Day2','https://imas-db.jp/song/event/cinderella10th_final_day2.html')," &
+                " ('LIKE4LIVE #cg_ootd Day1','https://imas-db.jp/song/event/cinderella_cg_like4live_ootd_day1.html')," &
+                " ('LIKE4LIVE #cg_ootd Day2','https://imas-db.jp/song/event/cinderella_cg_like4live_ootd_day2.html')," &
+                " ('Twinkle LIVE Constellation Gradation Day1','https://imas-db.jp/song/event/cinderella_cg_constellation_gradation_day1.html')," &
+                " ('Twinkle LIVE Constellation Gradation Day2','https://imas-db.jp/song/event/cinderella_cg_constellation_gradation_day2.html')"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
 
@@ -191,7 +194,7 @@
                 " ('花守ゆみり','はなもりゆみり','佐藤心')," &
                 " ('早見沙織','はやみさおり','高垣楓')," &
                 " ('原紗友里','はらさゆり','本田未央')," &
-                " ('原涼子','はらすずこ','望月聖')" &
+                " ('原涼子','はらすずこ','望月聖')," &
                 " ('原田彩楓','はらださやか','三船美優')," &
                 " ('原田ひとみ','はらだひとみ','十時愛梨')," &
                 " ('原優子','はらゆうこ','向井拓海')," &
@@ -222,6 +225,35 @@
             cmd.ExecuteNonQuery()
         End Using
     End Sub
+
+    ''' <summary>
+    ''' アイマスDBから情報を取得
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function C_GetData() As Boolean
+        Dim bRet As Boolean = True
+
+        Try
+            Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
+                cn.Open()
+                Using cmd As New SQLite.SQLiteCommand
+                    cmd.Connection = cn
+                    cmd.CommandText = "select ライブデータ from ライブテーブル"
+                    Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
+                    Do While reader.Read
+
+                    Loop
+                    reader.Close()
+                End Using
+            End Using
+
+        Catch ex As Exception
+            bRet = False
+            MessageBox.Show(ex.Message, "C_SQLiteExecuteScalar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End Try
+
+        Return bRet
+    End Function
 
     ''' <summary>
     ''' SQLiteCommand.ExecuteScalarを実行する
