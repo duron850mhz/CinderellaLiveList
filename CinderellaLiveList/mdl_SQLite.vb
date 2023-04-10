@@ -1,4 +1,7 @@
-﻿Module mdl_SQLite
+﻿Imports System.IO
+Imports System.Net
+
+Module mdl_SQLite
     Public DB_CS_SQLite As String
 
     ''' <summary>
@@ -241,7 +244,19 @@
                     cmd.CommandText = "select ライブデータ from ライブテーブル"
                     Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
                     Do While reader.Read
+                        Using wc As New WebClient
+                            '指定したURLからデータを取得する
+                            Using ws As Stream = wc.OpenRead(reader("ライブデータ"))
+                                'エンコード指定で文字列を取得する
+                                Using sr As New StreamReader(ws, System.Text.Encoding.UTF8)
+                                    '分析
+                                    Dim strLine As String = sr.ReadLine
+                                    Do While strLine IsNot Nothing
 
+                                    Loop
+                                End Using
+                            End Using
+                        End Using
                     Loop
                     reader.Close()
                 End Using
