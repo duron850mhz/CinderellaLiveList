@@ -72,7 +72,7 @@ Module mdl_SQLite
                 " ('SUMMER FESTIV@L 2015 東京','https://imas-db.jp/song/event/cinderella_20150802.html')," &
                 " ('SUMMER FESTIV@L 2015 大阪','https://imas-db.jp/song/event/cinderella_20150823.html')," &
                 " ('シンデレラの舞踏会 -Power of Smile- Day1','https://imas-db.jp/song/event/cinderella3rd1128.html')," &
-                " ('シンデレラの舞踏会 -Power of Smile- Day2','2https://imas-db.jp/song/event/cinderella3rd1129.html')," &
+                " ('シンデレラの舞踏会 -Power of Smile- Day2','https://imas-db.jp/song/event/cinderella3rd1129.html')," &
                 " ('TriCastle Story 神戸 Day1','https://imas-db.jp/song/event/cinderella4th0903.html')," &
                 " ('TriCastle Story 神戸 Day2','https://imas-db.jp/song/event/cinderella4th0904.html')," &
                 " ('TriCastle Story SSA Day1','https://imas-db.jp/song/event/cinderella4th1015.html')," &
@@ -137,6 +137,7 @@ Module mdl_SQLite
                 " ('赤﨑千夏','あかさきちなつ','日野茜')," &
                 " ('朝井彩加','あさいあやか','早坂美玲')," &
                 " ('天野聡美','あまのさとみ','白菊ほたる')," &
+                " ('安齋由香里','あんざいゆかり','西園寺琴歌')," &
                 " ('飯田友子','いいだゆうこ','速水奏')," &
                 " ('五十嵐裕美','いがらしひろみ','双葉杏')," &
                 " ('生田輝','いくたてる','ナターリア')," &
@@ -235,13 +236,15 @@ Module mdl_SQLite
     ''' <returns></returns>
     Public Function C_GetData() As Boolean
         Dim bRet As Boolean = True
+        Dim strSQL As String = ""
 
         Try
             Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
                 cn.Open()
                 Using cmd As New SQLite.SQLiteCommand
                     cmd.Connection = cn
-                    cmd.CommandText = "select ライブデータ from ライブテーブル"
+                    cmd.CommandText = "select * from ライブテーブル" &
+                                      " order by ライブid"
                     Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
                     Do While reader.Read
                         Using wc As New WebClient
@@ -252,13 +255,47 @@ Module mdl_SQLite
                                     '分析
                                     Dim strLine As String = sr.ReadLine
                                     Do While strLine IsNot Nothing
-
+                                        Select Case True
+                                            Case strLine.StartsWith("<p>20")
+                                                '多分日付
+                                                Dim strTmp As String = strLine.Substring(3, 10)
+                                                If IsDate(strTmp) Then
+                                                    strSQL &= "update ライブテーブル" &
+                                                              " set ライブ日付 = '" & CDate(strTmp).ToShortDateString & "'" &
+                                                              " where ライブid = " & reader("ライブid").ToString & ";"
+                                                End If
+                                            Case strLine.StartsWith("<p>出演")
+                                                '多分出演者
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<p>「アイドルマスターシンデレラガールズ」出演")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<span class=""idol_cute")
+                                                '多分こっちも出演者
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<span class=""idol_cool")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<span class=""idol_passion")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<li class=""list-inline-item""><span class=""idol_cute")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<li class=""list-inline-item""><span class=""idol_cool")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<li class=""list-inline-item""><span class=""idol_passion")
+                                                strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                        End Select
+                                        strLine = sr.ReadLine
                                     Loop
                                 End Using
                             End Using
                         End Using
                     Loop
                     reader.Close()
+
+                    If strSQL <> "" Then
+                        cmd.CommandText = strSQL
+                        cmd.ExecuteNonQuery()
+                        Console.WriteLine(strSQL)
+                    End If
                 End Using
             End Using
 
@@ -268,6 +305,48 @@ Module mdl_SQLite
         End Try
 
         Return bRet
+    End Function
+
+    ''' <summary>
+    ''' 出演者名取得
+    ''' </summary>
+    ''' <param name="strLine"></param>
+    ''' <returns></returns>
+    Private Function I_GetPerformer(ByRef strLine As String, ByRef iLiveID As Integer) As String
+        Dim strSQL As String = ""
+
+        Dim strTmp As String() = strLine.Split(",")
+        For ii = 0 To strTmp.Count - 1
+            '氏名切り出し
+            strTmp(ii) = strTmp(ii).Replace("</span>", "").Replace("</p>", "").Replace("</li>", "")
+            Dim iLoc As Integer = strTmp(ii).LastIndexOf(">")
+            If iLoc >= 0 Then
+                Dim strName As String = strTmp(ii).Substring(iLoc + 1)
+                If strName.StartsWith("ルゥ") Then
+                    strName = "ルゥ・ティン"
+                End If
+                If strName = "種崎敦美" Then
+                    strName = "種﨑敦美"
+                End If
+
+                If strName.StartsWith("出演") Then
+                    Return vbNullString
+                End If
+
+                'SQL追加
+                strSQL &= "insert into 出演者テーブル" &
+                      " (声優id, ライブid)" &
+                      " values" &
+                      "(" &
+                       "(" &
+                        "select 声優id from 声優テーブル" &
+                        " where 声優名 = '" & strName & "'" &
+                       "), " & iLiveID.ToString & ");"
+
+            End If
+        Next
+
+        Return strSQL
     End Function
 
     ''' <summary>
