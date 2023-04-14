@@ -4,6 +4,22 @@ Imports System.Net
 Module mdl_SQLite
     Public DB_CS_SQLite As String
 
+    Private Class clsSong
+        Public SongID As Integer
+        Public Name As String
+    End Class
+    Private Class clsSing
+        Public LiveID As Integer
+        Public No As Integer
+        Public PerformarName As String
+        Public SongNo As Integer
+        Public SongName As String
+        Public Memo As String
+    End Class
+
+    Dim LC_Song As New List(Of clsSong)
+    Dim LC_Sing As New List(Of clsSing)
+
     ''' <summary>
     ''' 接続文字列初期化
     ''' </summary>
@@ -42,9 +58,8 @@ Module mdl_SQLite
                 "[ライブデータ] TEXT);" &
              "CREATE TABLE [楽曲テーブル] (" &
                 "[楽曲id] INTEGER PRIMARY KEY AUTOINCREMENT," &
-                "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
-                "[曲順] INTEGER," &
-                "[楽曲名] TEXT);" &
+                "[楽曲名] TEXT," &
+                "[楽曲備考] TEXT);" &
              "CREATE TABLE [声優テーブル] (" &
                 "[声優id] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[声優名] TEXT," &
@@ -53,11 +68,15 @@ Module mdl_SQLite
              "CREATE TABLE [出演者テーブル] (" &
                 "[出演者id] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[声優id] INTEGER REFERENCES [声優テーブル]([声優id]) ON DELETE CASCADE ON UPDATE CASCADE," &
-                "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE);" &
+                "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[ゲスト] BOOLEAN);" &
              "CREATE TABLE [歌唱テーブル] (" &
                 "[歌唱id] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[曲順] INTEGER," &
                 "[声優id] INTEGER REFERENCES [声優テーブル]([声優id]) ON DELETE CASCADE ON UPDATE CASCADE," &
-                "[楽曲id] INTEGER REFERENCES [楽曲テーブル]([楽曲id]) ON DELETE CASCADE ON UPDATE CASCADE);"
+                "[楽曲id] INTEGER REFERENCES [楽曲テーブル]([楽曲id]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[歌唱備考] TEXT);"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
 
@@ -282,6 +301,8 @@ Module mdl_SQLite
                                                 strSQL &= I_GetPerformer(strLine, reader("ライブid"))
                                             Case strLine.StartsWith("<li class=""list-inline-item""><span class=""idol_passion")
                                                 strSQL &= I_GetPerformer(strLine, reader("ライブid"))
+                                            Case strLine.StartsWith("<thead> <tr> <th>No.</th> <th>楽曲</th> <th>演者</th> </tr> </thead>")
+                                                strSQL &= I_GetSong(sr, reader("ライブid"))
                                         End Select
                                         strLine = sr.ReadLine
                                     Loop
@@ -312,7 +333,7 @@ Module mdl_SQLite
     ''' </summary>
     ''' <param name="strLine"></param>
     ''' <returns></returns>
-    Private Function I_GetPerformer(ByRef strLine As String, ByRef iLiveID As Integer) As String
+    Private Function I_GetPerformer(ByVal strLine As String, ByVal iLiveID As Integer) As String
         Dim strSQL As String = ""
 
         Dim strTmp As String() = strLine.Split(",")
@@ -345,6 +366,75 @@ Module mdl_SQLite
 
             End If
         Next
+
+        Return strSQL
+    End Function
+
+    ''' <summary>
+    ''' 楽曲取得
+    ''' </summary>
+    ''' <param name="sr"></param>
+    ''' <returns></returns>
+    Private Function I_GetSong(ByRef sr As StreamReader, ByVal iLiveID As Integer) As String
+        Dim strSQL As String = ""
+        Dim bEnd As Boolean = False
+
+        Do
+            Try
+                Dim strLine As String = sr.ReadLine
+                If strLine <> Nothing Then
+                    If strLine.StartsWith("<tr> <td>") Or strLine.StartsWith("<tr class=""extra"">") Then
+                        'たぶん歌唱データ行
+                        strLine = strLine.Replace("<tr>", "").Replace("<tr class=""extra"">", "").Replace("<td>", "").Replace("</tr>", "").Replace("</td>", ",")
+                        Dim strTmp As String() = strLine.Split(",")
+                        '
+                        If IsNumeric(strTmp(0)) Then
+                            Dim song As New clsSong
+                            Dim sing As New clsSing
+                            Dim iSongID As Integer
+                            If strTmp(1).StartsWith(" <a href=") Then
+                                '楽曲データあり
+                                Dim iLoc As Integer = strTmp(1).IndexOf(".html")
+                                If iLoc >= 0 Then
+                                    iSongID = Val(strTmp(1).Substring(20, iLoc - 20))
+                                    Dim results = LC_Song.Where(Function(s) s.SongID = iSongID)
+                                    If results.Count = 0 Then
+                                        'まだ未登録
+                                        song.SongID = iSongID
+                                        song.Name = strTmp(1).Substring(iLoc + 7, strTmp(1).Length - iLoc - 11)
+                                        LC_Song.Add(song)
+                                    End If
+                                Else
+                                    Stop
+                                End If
+                            Else
+                                '楽曲データなし
+                                Dim results = LC_Song.Where(Function(s) s.Name = strTmp(1))
+                                If results Is Nothing Then
+                                    'まだ未登録
+                                    song.SongID = LC_Song.Count + 10000
+                                    song.Name = strTmp(1)
+                                    LC_Song.Add(song)
+                                    iSongID = song.SongID
+                                Else
+                                    'あった
+                                    iSongID = results(0).SongID
+                                End If
+                            End If
+
+                            '歌唱データ
+                            For ii = 2 To strTmp.Count - 1
+
+                            Next
+                        End If
+                    ElseIf strLine.StartsWith("</tbody>") Then
+                        bEnd = True
+                    End If
+                End If
+            Catch ex As Exception
+                Stop
+            End Try
+        Loop While bEnd = False
 
         Return strSQL
     End Function
