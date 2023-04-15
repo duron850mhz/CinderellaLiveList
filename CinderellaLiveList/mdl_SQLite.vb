@@ -8,17 +8,23 @@ Module mdl_SQLite
         Public SongID As Integer
         Public Name As String
     End Class
+
     Private Class clsSing
         Public LiveID As Integer
         Public No As Integer
-        Public PerformarName As String
-        Public SongNo As Integer
-        Public SongName As String
+        Public SongID As Integer
         Public Memo As String
+        Public guid As Guid
+    End Class
+
+    Private Class clsPerformer
+        Public guid As Guid
+        Public PerformerName As String
     End Class
 
     Dim LC_Song As New List(Of clsSong)
     Dim LC_Sing As New List(Of clsSing)
+    Dim LC_Performer As New List(Of clsPerformer)
 
     ''' <summary>
     ''' 接続文字列初期化
@@ -74,9 +80,13 @@ Module mdl_SQLite
                 "[歌唱id] INTEGER PRIMARY KEY AUTOINCREMENT," &
                 "[ライブid] INTEGER REFERENCES [ライブテーブル]([ライブid]) ON DELETE CASCADE ON UPDATE CASCADE," &
                 "[曲順] INTEGER," &
-                "[声優id] INTEGER REFERENCES [声優テーブル]([声優id]) ON DELETE CASCADE ON UPDATE CASCADE," &
                 "[楽曲id] INTEGER REFERENCES [楽曲テーブル]([楽曲id]) ON DELETE CASCADE ON UPDATE CASCADE," &
-                "[歌唱備考] TEXT);"
+                "[歌唱備考] TEXT);" &
+             "CREATE TABLE [歌唱者テーブル] (" &
+                "[歌唱者id] INTEGER PRIMARY KEY AUTOINCREMENT," &
+                "[歌唱id] INTEGER REFERENCES [歌唱テーブル]([歌唱id]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[声優id] INTEGER REFERENCES [声優テーブル]([声優id]) ON DELETE CASCADE ON UPDATE CASCADE," &
+                "[歌唱者フラグ] INTEGER);"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
 
@@ -380,8 +390,8 @@ Module mdl_SQLite
         Dim bEnd As Boolean = False
 
         Do
-            Try
-                Dim strLine As String = sr.ReadLine
+            'Try
+            Dim strLine As String = sr.ReadLine
                 If strLine <> Nothing Then
                     If strLine.StartsWith("<tr> <td>") Or strLine.StartsWith("<tr class=""extra"">") Then
                         'たぶん歌唱データ行
@@ -392,48 +402,65 @@ Module mdl_SQLite
                             Dim song As New clsSong
                             Dim sing As New clsSing
                             Dim iSongID As Integer
-                            If strTmp(1).StartsWith(" <a href=") Then
-                                '楽曲データあり
-                                Dim iLoc As Integer = strTmp(1).IndexOf(".html")
-                                If iLoc >= 0 Then
-                                    iSongID = Val(strTmp(1).Substring(20, iLoc - 20))
-                                    Dim results = LC_Song.Where(Function(s) s.SongID = iSongID)
-                                    If results.Count = 0 Then
-                                        'まだ未登録
-                                        song.SongID = iSongID
-                                        song.Name = strTmp(1).Substring(iLoc + 7, strTmp(1).Length - iLoc - 11)
-                                        LC_Song.Add(song)
-                                    End If
-                                Else
-                                    Stop
+
+                        If strTmp(1).IndexOf(" <a href=") >= 0 Then
+                            '楽曲データあり
+                            Dim iLoc As Integer = strTmp(1).IndexOf(".html")
+                            If iLoc >= 0 Then
+                                Dim iLoc2 As Integer = strTmp(1).IndexOf("<a href=")
+                                iSongID = Val(strTmp(1).Substring(iLoc2 + 19, iLoc - iLoc2 - 19))
+                                Dim results = LC_Song.Where(Function(s) s.SongID = iSongID)
+                                If results.Count = 0 Then
+                                    'まだ未登録
+                                    song.SongID = iSongID
+                                    song.Name = strTmp(1).Substring(iLoc + 7, strTmp(1).Length - iLoc - 11)
+                                    LC_Song.Add(song)
                                 End If
                             Else
-                                '楽曲データなし
-                                Dim results = LC_Song.Where(Function(s) s.Name = strTmp(1))
-                                If results Is Nothing Then
-                                    'まだ未登録
-                                    song.SongID = LC_Song.Count + 10000
-                                    song.Name = strTmp(1)
-                                    LC_Song.Add(song)
-                                    iSongID = song.SongID
-                                Else
-                                    'あった
-                                    iSongID = results(0).SongID
+                                Stop
+                            End If
+                        Else
+                            '楽曲データなし
+                            Dim results = LC_Song.Where(Function(s) s.Name = strTmp(1))
+                            If results.Count = 0 Then
+                                'まだ未登録
+                                song.SongID = LC_Song.Count + 10000
+                                song.Name = strTmp(1)
+                                LC_Song.Add(song)
+                                iSongID = song.SongID
+                            Else
+                                'あった
+                                iSongID = results(0).SongID
                                 End If
                             End If
 
                             '歌唱データ
-                            For ii = 2 To strTmp.Count - 1
+                            sing.LiveID = iLiveID
+                            sing.No = Val(strTmp(0))
+                            sing.SongID = iSongID
+                            sing.guid = Guid.NewGuid()
+                            LC_Sing.Add(sing)
 
+                            '歌唱者データ
+                            For ii = 2 To strTmp.Count - 1
+                                If strTmp(ii).Trim <> "" Then
+                                    Dim strName As String = strTmp(ii).Replace("</span>", "")
+                                    Dim iLoc As Integer = strName.LastIndexOf(">")
+                                    strName = strName.Substring(iLoc + 1)
+                                    Dim performer As New clsPerformer
+                                    performer.PerformerName = strName
+                                    performer.guid = sing.guid
+                                    LC_Performer.Add(performer)
+                                End If
                             Next
                         End If
                     ElseIf strLine.StartsWith("</tbody>") Then
                         bEnd = True
                     End If
                 End If
-            Catch ex As Exception
-                Stop
-            End Try
+            'Catch ex As Exception
+            'Stop
+            'End Try
         Loop While bEnd = False
 
         Return strSQL
