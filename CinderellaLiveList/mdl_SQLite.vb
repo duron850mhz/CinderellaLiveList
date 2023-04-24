@@ -20,6 +20,8 @@ Module mdl_SQLite
     Private Class clsPerformer
         Public guid As Guid
         Public PerformerName As String
+        Public Memo As String
+        Public Flag As Integer
     End Class
 
     Dim LC_Song As New List(Of clsSong)
@@ -312,7 +314,7 @@ Module mdl_SQLite
                                             Case strLine.StartsWith("<li class=""list-inline-item""><span class=""idol_passion")
                                                 strSQL &= I_GetPerformer(strLine, reader("ライブid"))
                                             Case strLine.StartsWith("<thead> <tr> <th>No.</th> <th>楽曲</th> <th>演者</th> </tr> </thead>")
-                                                strSQL &= I_GetSong(sr, reader("ライブid"))
+                                                Call I_GetSong(sr, reader("ライブid"))
                                         End Select
                                         strLine = sr.ReadLine
                                     Loop
@@ -322,32 +324,32 @@ Module mdl_SQLite
                     Loop
                     reader.Close()
 
-                    'Using sw As New StreamWriter("V:\SONG.CSV", False, System.Text.Encoding.UTF8)
-                    '    For ii = 0 To LC_Song.Count - 1
-                    '        sw.WriteLine(LC_Song(ii).SongID & "," &
-                    '                     LC_Song(ii).Name)
-                    '    Next
-                    '    sw.Flush()
-                    '    sw.Close()
-                    'End Using
-                    'Using sw As New StreamWriter("V:\SING.CSV", False, System.Text.Encoding.UTF8)
-                    '    For ii = 0 To LC_Sing.Count - 1
-                    '        sw.WriteLine(LC_Sing(ii).SongID & "," &
-                    '                     LC_Sing(ii).LiveID & "," &
-                    '                     LC_Sing(ii).No & "," &
-                    '                     LC_Sing(ii).guid.ToString)
-                    '    Next
-                    '    sw.Flush()
-                    '    sw.Close()
-                    'End Using
-                    'Using sw As New StreamWriter("V:\PERFORMER.CSV", False, System.Text.Encoding.UTF8)
-                    '    For ii = 0 To LC_Performer.Count - 1
-                    '        sw.WriteLine(LC_Performer(ii).guid.ToString & "," &
-                    '                     LC_Performer(ii).PerformerName)
-                    '    Next
-                    '    sw.Flush()
-                    '    sw.Close()
-                    'End Using
+                    Using sw As New StreamWriter("V:\SONG.CSV", False, System.Text.Encoding.UTF8)
+                        For ii = 0 To LC_Song.Count - 1
+                            sw.WriteLine(LC_Song(ii).SongID & "," &
+                                         LC_Song(ii).Name)
+                        Next
+                        sw.Flush()
+                        sw.Close()
+                    End Using
+                    Using sw As New StreamWriter("V:\SING.CSV", False, System.Text.Encoding.UTF8)
+                        For ii = 0 To LC_Sing.Count - 1
+                            sw.WriteLine(LC_Sing(ii).SongID & "," &
+                                         LC_Sing(ii).LiveID & "," &
+                                         LC_Sing(ii).No & "," &
+                                         LC_Sing(ii).guid.ToString)
+                        Next
+                        sw.Flush()
+                        sw.Close()
+                    End Using
+                    Using sw As New StreamWriter("V:\PERFORMER.CSV", False, System.Text.Encoding.UTF8)
+                        For ii = 0 To LC_Performer.Count - 1
+                            sw.WriteLine(LC_Performer(ii).guid.ToString & "," &
+                                         LC_Performer(ii).PerformerName)
+                        Next
+                        sw.Flush()
+                        sw.Close()
+                    End Using
 
                     If strSQL <> "" Then
                         cmd.CommandText = strSQL
@@ -411,14 +413,12 @@ Module mdl_SQLite
     ''' 楽曲取得
     ''' </summary>
     ''' <param name="sr"></param>
-    ''' <returns></returns>
-    Private Function I_GetSong(ByRef sr As StreamReader, ByVal iLiveID As Integer) As String
-        Dim strSQL As String = ""
+    Private Sub I_GetSong(ByRef sr As StreamReader, ByVal iLiveID As Integer)
         Dim bEnd As Boolean = False
 
         Do
-            'Try
-            Dim strLine As String = sr.ReadLine
+            Try
+                Dim strLine As String = sr.ReadLine
                 If strLine <> Nothing Then
                     If strLine.StartsWith("<tr> <td>") Or strLine.StartsWith("<tr class=""extra"">") Then
                         'たぶん歌唱データ行
@@ -430,69 +430,105 @@ Module mdl_SQLite
                             Dim sing As New clsSing
                             Dim iSongID As Integer
 
-                        strTmp(1) = strTmp(1).Replace("&#39;", "'")     'アポストロフィー
-                        strTmp(1) = strTmp(1).Replace("&#9825;", "♥")   '白ハート
-                        strTmp(1) = strTmp(1).Replace("&#216;", "Ø")    'Over!
-                        strTmp(1) = strTmp(1).Replace("&hearts;", "♥")  '黒ハート
-                        strTmp(1) = strTmp(1).Replace("&amp;", "&")
-                        strTmp(1) = strTmp(1).Replace("〜", "～")
-                        strTmp(1) = strTmp(1).Replace(" <small class=""notes"">(新曲)</small>", "")
-                        strTmp(1) = strTmp(1).Replace(" Secret Day Break", " Secret Daybreak")
-                        strTmp(1) = strTmp(1).Replace(" ドレミファクトリー♪", "ドレミファクトリー！")
-                        strTmp(1) = strTmp(1).Replace("Halloween?Code", "Halloween♥Code")
-                        strTmp(1) = strTmp(1).Replace(" <small class=""additional"">", "")
-                        strTmp(1) = strTmp(1).Replace("</small>", "")
+                            strTmp(1) = strTmp(1).Replace("&#39;", "'")     'アポストロフィー
+                            strTmp(1) = strTmp(1).Replace("&#9825;", "♥")   '白ハート
+                            strTmp(1) = strTmp(1).Replace("&#216;", "Ø")    'Over!
+                            strTmp(1) = strTmp(1).Replace("&hearts;", "♥")  '黒ハート
+                            strTmp(1) = strTmp(1).Replace("&amp;", "&")
+                            strTmp(1) = strTmp(1).Replace("〜", "～")
+                            strTmp(1) = strTmp(1).Replace(" <small class=""notes"">(新曲)</small>", "")
+                            strTmp(1) = strTmp(1).Replace(" Secret Day Break", " Secret Daybreak")
+                            strTmp(1) = strTmp(1).Replace(" ドレミファクトリー♪", "ドレミファクトリー！")
+                            strTmp(1) = strTmp(1).Replace("Halloween?Code", "Halloween♥Code")
+                            strTmp(1) = strTmp(1).Replace(" <small class=""additional"">", "")
+                            strTmp(1) = strTmp(1).Replace("</small>", "")
 
-                        If strTmp(1).IndexOf(" <a href=") >= 0 Then
-                            '楽曲データあり
-                            Dim iLoc As Integer = strTmp(1).IndexOf(".html")
-                            If iLoc >= 0 Then
-                                Dim strID As String = strTmp(1).Substring(strTmp(1).IndexOf(" <a href="))
-                                strID = strID.Replace(" <a href=""/song/detail/", "").Replace(" <a href=""../detail/", "")
-                                Dim iLoc2 As Integer = strID.IndexOf(".")
-                                iSongID = Val(strID.Substring(0, iLoc2))
-                                Dim results = LC_Song.Where(Function(s) s.SongID = iSongID)
-                                If results.Count = 0 Then
-                                    'まだ未登録
-                                    song.SongID = iSongID
-                                    song.Name = strTmp(1).Substring(iLoc + 7, strTmp(1).Length - iLoc - 11).Trim
-                                    LC_Song.Add(song)
+                            If strTmp(1).IndexOf(" <a href=") >= 0 Then
+                                '楽曲データあり
+                                Dim iLoc As Integer = strTmp(1).IndexOf(".html")
+                                If iLoc >= 0 Then
+                                    Dim strID As String = strTmp(1).Substring(strTmp(1).IndexOf(" <a href="))
+                                    strID = strID.Replace(" <a href=""/song/detail/", "").Replace(" <a href=""../detail/", "")
+                                    Dim iLoc2 As Integer = strID.IndexOf(".")
+                                    iSongID = Val(strID.Substring(0, iLoc2))
+                                    Dim results = LC_Song.Where(Function(s) s.SongID = iSongID)
+                                    If results.Count = 0 Then
+                                        'まだ未登録
+                                        song.SongID = iSongID
+                                        song.Name = strTmp(1).Substring(iLoc + 7, strTmp(1).Length - iLoc - 11).Trim
+                                        LC_Song.Add(song)
+                                    End If
+                                Else
+                                    Stop
                                 End If
                             Else
-                                Stop
-                            End If
-                        Else
-                            '楽曲データなし
-                            Dim results = LC_Song.Where(Function(s) s.Name = strTmp(1))
-                            If results.Count = 0 Then
-                                'まだ未登録
-                                song.SongID = LC_Song.Count + 10000
-                                song.Name = strTmp(1).Trim
-                                LC_Song.Add(song)
-                                iSongID = song.SongID
-                            Else
-                                'あった
-                                iSongID = results(0).SongID
-                            End If
-                        End If
+                                '楽曲データなし
+                                Dim strName As String = strTmp(1).Trim
 
-                        '歌唱データ
-                        sing.LiveID = iLiveID
+                                strName = strName.Replace("志希とちとせの饗宴", "")
+                                strName = strName.Replace("周子・夕美による", "")
+                                strName = strName.Replace("凸と凹？が駆け抜ける", "")
+                                strName = strName.Replace("なんぼでも笑える", "")
+                                strName = strName.Replace("絆の", "")
+                                strName = strName.Replace("3 LAND MEDLEY", "")
+                                strName = strName.Replace("(Instrumental)", "")
+                                strName = strName.Trim
+
+                                Dim results = LC_Song.Where(Function(s) s.Name = strName)
+                                If results.Count = 0 Then
+                                    'まだ未登録
+                                    song.Name = strName
+                                    song.SongID = LC_Song.Count + 10000
+                                    LC_Song.Add(song)
+                                    iSongID = song.SongID
+                                Else
+                                    'あった
+                                    iSongID = results(0).SongID
+                                End If
+                            End If
+
+                            '歌唱データ
+                            sing.LiveID = iLiveID
                             sing.No = Val(strTmp(0))
                             sing.SongID = iSongID
                             sing.guid = Guid.NewGuid()
                             LC_Sing.Add(sing)
 
                             '歌唱者データ
+                            Dim strMemo As String() = {"(一部)", "(ウサギ)", "(冒頭のみ)", "(王子役)", "(王子)", "(間奏でのセリフのみ)"}
                             For ii = 2 To strTmp.Count - 1
                                 If strTmp(ii).Trim <> "" Then
-                                    Dim strName As String = strTmp(ii).Replace("</span>", "")
+                                    If strTmp(ii).IndexOf("3Dモデル") >= 0 Then
+                                        Exit For
+                                    End If
+
+                                    Dim strName As String = strTmp(ii).Replace("</span>)", "").Replace("</span>", "").Replace("を含む)", "")
+                                    Dim performer As New clsPerformer
+
+                                    performer.Flag = 0
+                                    For Each m In strMemo
+                                        If strTmp(ii).IndexOf(m) >= 0 Then
+                                            strName = strName.Replace(m, "")
+                                            performer.Memo = m
+                                            performer.Flag = 1
+                                        End If
+                                    Next
+
+                                    If strTmp(ii).IndexOf("(バックダンサー:大橋/福原/原)") >= 0 Then
+
+                                    End If
+                                    'バックダンサー
+                                    'セリフ参加
+
+                                    strName = strName.Trim
+
                                     Dim iLoc As Integer = strName.LastIndexOf(">")
                                     strName = strName.Substring(iLoc + 1)
-                                    Dim performer As New clsPerformer
                                     performer.PerformerName = strName
                                     performer.guid = sing.guid
                                     LC_Performer.Add(performer)
+
+                                    Console.WriteLine(iLiveID.ToString & "," & strName & "," & strTmp(ii))
                                 End If
                             Next
                         End If
@@ -500,13 +536,11 @@ Module mdl_SQLite
                         bEnd = True
                     End If
                 End If
-            'Catch ex As Exception
-            'Stop
-            'End Try
+            Catch ex As Exception
+                Stop
+            End Try
         Loop While bEnd = False
-
-        Return strSQL
-    End Function
+    End Sub
 
     ''' <summary>
     ''' SQLiteCommand.ExecuteScalarを実行する
