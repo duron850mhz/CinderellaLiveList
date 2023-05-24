@@ -190,6 +190,7 @@ Module mdl_SQLite
                 " ('久野美咲','くのみさき','市原仁奈')," &
                 " ('黒沢ともよ','くろさわともよ','赤城みりあ')," &
                 " ('小市眞琴','こいちまこと','結城晴')," &
+                " ('小森結梨','こもりゆり','古賀小春')," &
                 " ('佐倉薫','さくらかおる','黒埼ちとせ')," &
                 " ('佐藤亜美菜','さとうあみな','橘ありす')," &
                 " ('下地紫野','しもじしの','中野有香')," &
@@ -324,24 +325,26 @@ Module mdl_SQLite
                     Loop
                     reader.Close()
 
-                    Using sw As New StreamWriter("V:\SONG.CSV", False, System.Text.Encoding.UTF8)
-                        For ii = 0 To LC_Song.Count - 1
-                            sw.WriteLine(LC_Song(ii).SongID & "," &
-                                         LC_Song(ii).Name)
-                        Next
-                        sw.Flush()
-                        sw.Close()
-                    End Using
-                    Using sw As New StreamWriter("V:\SING.CSV", False, System.Text.Encoding.UTF8)
-                        For ii = 0 To LC_Sing.Count - 1
-                            sw.WriteLine(LC_Sing(ii).SongID & "," &
-                                         LC_Sing(ii).LiveID & "," &
-                                         LC_Sing(ii).No & "," &
-                                         LC_Sing(ii).guid.ToString)
-                        Next
-                        sw.Flush()
-                        sw.Close()
-                    End Using
+
+                    For ii = 0 To LC_Song.Count - 1
+                        Console.WriteLine(LC_Song(ii).Name)
+                        cmd.CommandText = "insert into 楽曲テーブル" &
+                                          "(楽曲id, 楽曲名) values (" &
+                                          LC_Song(ii).SongID.ToString & "," &
+                                          "'" & LC_Song(ii).Name.Replace("'", "''") & "')"
+                        cmd.ExecuteNonQuery()
+                    Next
+
+                    For ii = 0 To LC_Sing.Count - 1
+                        Console.WriteLine(LC_Sing(ii).LiveID & ":" & LC_Sing(ii).No)
+                        cmd.CommandText = "insert into 歌唱テーブル" &
+                                          "(ライブid,曲順,楽曲id) values (" &
+                                          LC_Sing(ii).LiveID.ToString & "," &
+                                          LC_Sing(ii).No.ToString & "," &
+                                          LC_Sing(ii).SongID & ")"
+                        cmd.ExecuteNonQuery()
+                    Next
+
                     Using sw As New StreamWriter("V:\PERFORMER.CSV", False, System.Text.Encoding.UTF8)
                         For ii = 0 To LC_Performer.Count - 1
                             sw.WriteLine(LC_Performer(ii).guid.ToString & "," &
@@ -470,6 +473,8 @@ Module mdl_SQLite
                                 strName = strName.Replace("凸と凹？が駆け抜ける", "")
                                 strName = strName.Replace("なんぼでも笑える", "")
                                 strName = strName.Replace("絆の", "")
+                                strName = strName.Replace("夜20時すぎの", "")
+                                strName = strName.Replace("友情で繋ぐ", "")
                                 strName = strName.Replace("3 LAND MEDLEY", "")
                                 strName = strName.Replace("(Instrumental)", "")
                                 strName = strName.Trim

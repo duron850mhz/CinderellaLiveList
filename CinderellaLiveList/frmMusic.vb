@@ -57,8 +57,9 @@ Public Class frmMusic
         Try
             Using cmd As New SQLiteCommand
                 cmd.Connection = LG_cn
-                cmd.CommandText = "select * from 楽曲テーブル" &
-                                  " where ライブid = " & cmbLive.SelectedValue.ToString &
+                cmd.CommandText = "select * from 歌唱テーブル, 楽曲テーブル" &
+                                  " where 歌唱テーブル.楽曲id = 楽曲テーブル.楽曲id" &
+                                  " and ライブid = " & cmbLive.SelectedValue.ToString &
                                   " order by 曲順"
                 Dim reader As SQLiteDataReader = cmd.ExecuteReader
                 Do While reader.Read
