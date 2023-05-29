@@ -49,8 +49,9 @@ Public Class frmMain
                     cn.Open()
                     Using cmd As New SQLite.SQLiteCommand
                         cmd.Connection = cn
-                        cmd.CommandText = "select * from 楽曲テーブル" &
-                                          " where ライブid = " & cmbLive.SelectedValue.ToString &
+                        cmd.CommandText = "select * from 歌唱テーブル,楽曲テーブル" &
+                                          " where 歌唱テーブル.楽曲id = 楽曲テーブル.楽曲id" &
+                                          " and ライブid = " & cmbLive.SelectedValue.ToString &
                                           " order by 曲順"
                         Dim reader As SQLiteDataReader = cmd.ExecuteReader
                         Do While reader.Read
@@ -58,6 +59,40 @@ Public Class frmMain
                             dgv.Rows.Add()
                             dgv.Rows(iRow).Cells(col_楽曲名.Index).Value = reader("楽曲名")
                             dgv.Rows(iRow).Cells(col_楽曲id.Index).Value = reader("楽曲id")
+                        Loop
+                        reader.Close()
+
+                        dgv.ColumnCount = 1
+                        cmd.CommandText = "select * from 出演者テーブル,声優テーブル" &
+                                          " where 出演者テーブル.声優id = 声優テーブル.声優id" &
+                                          " and ライブid = " & cmbLive.SelectedValue.ToString &
+                                          " order by 声優カナ名"
+                        reader = cmd.ExecuteReader
+                        Do While reader.Read
+                            Dim c As New DataGridViewTextBoxColumn
+                            c.HeaderText = reader("声優名")
+                            c.Name = reader("声優id")
+                            c.Width = 20
+                            dgv.Columns.Add(c)
+                        Loop
+                        reader.Close()
+
+                        cmd.CommandText = "select * from 歌唱テーブル,歌唱者テーブル" &
+                                          " where 歌唱テーブル.歌唱id = 歌唱者テーブル.歌唱id" &
+                                          " and ライブid = " & cmbLive.SelectedValue.ToString
+                        reader = cmd.ExecuteReader
+                        Do While reader.Read
+                            For iCol = 1 To dgv.ColumnCount - 1
+                                If reader("声優id") = dgv.Columns(iCol).Name Then
+                                    For iRow = 0 To dgv.RowCount - 1
+                                        If reader("楽曲id") = dgv.Rows(iRow).Cells(col_楽曲id.Index).Value Then
+                                            dgv.Rows(iRow).Cells(iCol).Value = "◯"
+                                            Exit For
+                                        End If
+                                    Next
+                                    Exit For
+                                End If
+                            Next
                         Loop
                         reader.Close()
                     End Using
@@ -129,5 +164,20 @@ Public Class frmMain
 
     Private Sub cmbLive_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbLive.SelectionChangeCommitted
         Call I_DataSet()
+    End Sub
+
+    Private Sub dgv_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles dgv.CellPainting
+        If e.RowIndex = -1 AndAlso e.ColumnIndex > 0 Then
+            e.Handled = True
+            e.PaintBackground(e.ClipBounds, False)
+            Dim g = e.Graphics()
+            Dim sf As New StringFormat()
+            'Dim fnt = New Font("@ＭＳ ゴシック", 10, FontStyle.Regular)
+            Dim fnt = dgv.ColumnHeadersDefaultCellStyle.Font
+            sf.FormatFlags = StringFormatFlags.DirectionVertical Or StringFormatFlags.NoWrap
+            sf.Alignment = StringAlignment.Near
+            sf.LineAlignment = StringAlignment.Center
+            g.DrawString(dgv.Columns(e.ColumnIndex).HeaderText, fnt, Brushes.Black, e.CellBounds, sf)
+        End If
     End Sub
 End Class
