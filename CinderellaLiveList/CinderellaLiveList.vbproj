@@ -164,6 +164,8 @@
     <Compile Include="frmPerson.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="mdl_ImasDB.vb" />
+    <Compile Include="mdl_music765plus.vb" />
     <Compile Include="mdl_SQLite.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

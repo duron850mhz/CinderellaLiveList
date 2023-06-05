@@ -34,6 +34,9 @@ Public Class frmMain
                 End Using
             End Using
         End Using
+
+        'cmb
+        cmbInitDB.SelectedIndex = 0
     End Sub
 
     ''' <summary>
@@ -179,5 +182,19 @@ Public Class frmMain
             sf.LineAlignment = StringAlignment.Center
             g.DrawString(dgv.Columns(e.ColumnIndex).HeaderText, fnt, Brushes.Black, e.CellBounds, sf)
         End If
+    End Sub
+
+    ''' <summary>
+    ''' DB初期化
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnInitDB_Click(sender As Object, e As EventArgs) Handles btnInitDB.Click
+        Select Case cmbInitDB.SelectedIndex
+            Case 0
+                Call C_SQLiteInitTable_music765plus()
+            Case 1
+                Call C_SQLiteInitTable_ImasDB()
+        End Select
     End Sub
 End Class

@@ -24,13 +24,15 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.dgv = New System.Windows.Forms.DataGridView()
+        Me.col_楽曲名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_楽曲id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnLive = New System.Windows.Forms.Button()
         Me.btnPerson = New System.Windows.Forms.Button()
         Me.btnPerformer = New System.Windows.Forms.Button()
         Me.btnMusic = New System.Windows.Forms.Button()
         Me.cmbLive = New System.Windows.Forms.ComboBox()
-        Me.col_楽曲名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_楽曲id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmbInitDB = New System.Windows.Forms.ComboBox()
+        Me.btnInitDB = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,6 +50,19 @@ Partial Class frmMain
         Me.dgv.RowTemplate.Height = 21
         Me.dgv.Size = New System.Drawing.Size(776, 371)
         Me.dgv.TabIndex = 1
+        '
+        'col_楽曲名
+        '
+        Me.col_楽曲名.HeaderText = "楽曲名"
+        Me.col_楽曲名.Name = "col_楽曲名"
+        Me.col_楽曲名.ReadOnly = True
+        '
+        'col_楽曲id
+        '
+        Me.col_楽曲id.HeaderText = "楽曲id"
+        Me.col_楽曲id.Name = "col_楽曲id"
+        Me.col_楽曲id.ReadOnly = True
+        Me.col_楽曲id.Visible = False
         '
         'btnLive
         '
@@ -98,24 +113,34 @@ Partial Class frmMain
         Me.cmbLive.Size = New System.Drawing.Size(445, 20)
         Me.cmbLive.TabIndex = 7
         '
-        'col_楽曲名
+        'cmbInitDB
         '
-        Me.col_楽曲名.HeaderText = "楽曲名"
-        Me.col_楽曲名.Name = "col_楽曲名"
-        Me.col_楽曲名.ReadOnly = True
+        Me.cmbInitDB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmbInitDB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbInitDB.FormattingEnabled = True
+        Me.cmbInitDB.Items.AddRange(New Object() {"music765plus.com", "imas-db.jp"})
+        Me.cmbInitDB.Location = New System.Drawing.Point(455, 418)
+        Me.cmbInitDB.Name = "cmbInitDB"
+        Me.cmbInitDB.Size = New System.Drawing.Size(121, 20)
+        Me.cmbInitDB.TabIndex = 8
         '
-        'col_楽曲id
+        'btnInitDB
         '
-        Me.col_楽曲id.HeaderText = "楽曲id"
-        Me.col_楽曲id.Name = "col_楽曲id"
-        Me.col_楽曲id.ReadOnly = True
-        Me.col_楽曲id.Visible = False
+        Me.btnInitDB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnInitDB.Location = New System.Drawing.Point(582, 418)
+        Me.btnInitDB.Name = "btnInitDB"
+        Me.btnInitDB.Size = New System.Drawing.Size(75, 23)
+        Me.btnInitDB.TabIndex = 9
+        Me.btnInitDB.Text = "DB初期化"
+        Me.btnInitDB.UseVisualStyleBackColor = True
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnInitDB)
+        Me.Controls.Add(Me.cmbInitDB)
         Me.Controls.Add(Me.cmbLive)
         Me.Controls.Add(Me.btnMusic)
         Me.Controls.Add(Me.btnPerformer)
@@ -137,4 +162,6 @@ Partial Class frmMain
     Friend WithEvents cmbLive As ComboBox
     Friend WithEvents col_楽曲名 As DataGridViewTextBoxColumn
     Friend WithEvents col_楽曲id As DataGridViewTextBoxColumn
+    Friend WithEvents cmbInitDB As ComboBox
+    Friend WithEvents btnInitDB As Button
 End Class
