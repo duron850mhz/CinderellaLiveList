@@ -218,7 +218,15 @@ Module mdl_music765plus
                 " ('2023-03-04','https://music765plus.com/AMUSE_VOICE_ACTORS_CHANNEL_FES#AF2023_DAY1','AMUSE VOICE ACTORS CHANNEL FES 2023 DAY1')," &
                 " ('2023-06-10','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_%E7%87%BF%E5%9F%8E%E5%A4%9C%E7%A5%AD_-%E3%81%8B%E3%81%8C%E3%82%84%E3%81%8D%E3%82%88%E3%81%BE%E3%81%A4%E3%82%8A-#DAY1','CINDERELLA GIRLS 燿城夜祭 DAY1')," &
                 " ('2023-06-11','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_%E7%87%BF%E5%9F%8E%E5%A4%9C%E7%A5%AD_-%E3%81%8B%E3%81%8C%E3%82%84%E3%81%8D%E3%82%88%E3%81%BE%E3%81%A4%E3%82%8A-#DAY2','CINDERELLA GIRLS 燿城夜祭 DAY2')," &
-                " ('2023-06-25','https://music765plus.com/%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA%E7%99%BA%E5%A3%B2%E8%A8%98%E5%BF%B5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#U149_ANIMATION_MASTER','U149 ANIMATION MASTER 発売記念イベント')"
+                " ('2023-06-25','https://music765plus.com/%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA%E7%99%BA%E5%A3%B2%E8%A8%98%E5%BF%B5%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#U149_ANIMATION_MASTER','U149 ANIMATION MASTER 発売記念イベント')," &
+                " ('2023-08-06','https://music765plus.com/CINDERELLA_PARTY!%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#CRP09','CINDERELLA REAL PARTY! 09〜御利神〜')," &
+                " ('2023-09-09','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_Shout_out_Live!!!#DAY1','CINDERELLA GIRLS Shout out Live!!! DAY1')," &
+                " ('2023-09-10','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_Shout_out_Live!!!#DAY2','CINDERELLA GIRLS Shout out Live!!! DAY2')," &
+                " ('2023-11-11','https://music765plus.com/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC_%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA_U149%E3%80%8D_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88_%E3%80%9C%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%80%9C#DAY1','U149 トゥインクルパーティー DAY1')," &
+                " ('2023-11-12','https://music765plus.com/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC_%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA_U149%E3%80%8D_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88_%E3%80%9C%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%80%9C#DAY2.E6.98.BC','U149 トゥインクルパーティー DAY2昼')," &
+                " ('2023-11-12','https://music765plus.com/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC_%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA_U149%E3%80%8D_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88_%E3%80%9C%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%80%9C#DAY2.E5.A4.9C','U149 トゥインクルパーティー DAY2夜')," &
+                " ('2023-12-09','https://music765plus.com/%E7%95%B0%E6%AC%A1%E5%85%83%E3%83%95%E3%82%A7%E3%82%B9_%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E2%98%85%E2%99%A5%EF%B8%8E%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E6%AD%8C%E5%90%88%E6%88%A6#DAY1','異次元フェス アイドルマスター★♥ラブライブ！歌合戦 DAY1')," &
+                " ('2023-12-10','https://music765plus.com/%E7%95%B0%E6%AC%A1%E5%85%83%E3%83%95%E3%82%A7%E3%82%B9_%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E2%98%85%E2%99%A5%EF%B8%8E%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E6%AD%8C%E5%90%88%E6%88%A6#DAY2','異次元フェス アイドルマスター★♥ラブライブ！歌合戦 DAY2')"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
         End Using
@@ -243,6 +251,7 @@ Module mdl_music765plus
                                       " order by ライブid"
                     Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
                     Do While reader.Read
+                        Console.WriteLine(reader("ライブid").ToString & " : " & reader("ライブ名"))
                         Using wc As New WebClient
                             '指定したURLからデータを取得する
                             Using ws As Stream = wc.OpenRead(reader("ライブデータ"))
