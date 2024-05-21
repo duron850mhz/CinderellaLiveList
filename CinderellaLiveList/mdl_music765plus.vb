@@ -59,7 +59,7 @@ Module mdl_music765plus
                 " ('2013-07-20','https://music765plus.com/THE_IDOLM@STER_8th_ANNIVERSARY_HOP!STEP!!FESTIV@L!!!#2013-07-20','8th HOP!STEP!!FESTIV@L!!! @OSAKA0720')," &
                 " ('2013-07-21','https://music765plus.com/THE_IDOLM@STER_8th_ANNIVERSARY_HOP!STEP!!FESTIV@L!!!#2013-07-21','8th HOP!STEP!!FESTIV@L!!! @OSAKA0721')," &
                 " ('2013-07-28','https://music765plus.com/%E3%83%AF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%95%E3%82%A7%E3%82%B9%E3%83%86%E3%82%A3%E3%83%90%E3%83%AB%E5%86%85%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#2013-07-28','デレラジスペシャルステージ(ワンフェス夏)')," &
-                " ('2013-08-23','https://music765plus.com/Animelo_Summer_Live%EF%BC%88%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%E3%81%AE%E3%81%BF%EF%BC%89#.E3.82.A2.E3.83.8B.E3.82.B5.E3.83.9E2013','Animelo Summer Live 2013')," &
+                " ('2013-08-23','https://music765plus.com/Animelo_Summer_Live%EF%BC%88%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%E3%81%AE%E3%81%BF%EF%BC%89#Animelo2013','Animelo Summer Live 2013')," &
                 " ('2013-09-21','https://music765plus.com/THE_IDOLM@STER_8th_ANNIVERSARY_HOP!STEP!!FESTIV@L!!!#2013-09-21.2622','8th HOP!STEP!!FESTIV＠L!!! @MAKUHARI')," &
                 " ('2013-09-22','https://music765plus.com/THE_IDOLM@STER_8th_ANNIVERSARY_HOP!STEP!!FESTIV@L!!!#2013-09-21.2622','8th HOP!STEP!!FESTIV＠L!!! @MAKUHARI')," &
                 " ('2013-10-12','https://music765plus.com/%E3%83%9E%E3%83%81%E2%98%85%E3%82%A2%E3%82%BD%E3%83%93%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#.E3.83.9E.E3.83.81.E2.98.85.E3.82.A2.E3.82.BD.E3.83.93vol.11','マチ★アソビVol.11ステージ')," &
@@ -226,12 +226,41 @@ Module mdl_music765plus
                 " ('2023-11-12','https://music765plus.com/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC_%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA_U149%E3%80%8D_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88_%E3%80%9C%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%80%9C#DAY2.E6.98.BC','U149 トゥインクルパーティー DAY2昼')," &
                 " ('2023-11-12','https://music765plus.com/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC_%E3%82%B7%E3%83%B3%E3%83%87%E3%83%AC%E3%83%A9%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA_U149%E3%80%8D_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88_%E3%80%9C%E3%83%88%E3%82%A5%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AB%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%80%9C#DAY2.E5.A4.9C','U149 トゥインクルパーティー DAY2夜')," &
                 " ('2023-12-09','https://music765plus.com/%E7%95%B0%E6%AC%A1%E5%85%83%E3%83%95%E3%82%A7%E3%82%B9_%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E2%98%85%E2%99%A5%EF%B8%8E%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E6%AD%8C%E5%90%88%E6%88%A6#DAY1','異次元フェス アイドルマスター★♥ラブライブ！歌合戦 DAY1')," &
-                " ('2023-12-10','https://music765plus.com/%E7%95%B0%E6%AC%A1%E5%85%83%E3%83%95%E3%82%A7%E3%82%B9_%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E2%98%85%E2%99%A5%EF%B8%8E%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E6%AD%8C%E5%90%88%E6%88%A6#DAY2','異次元フェス アイドルマスター★♥ラブライブ！歌合戦 DAY2')"
+                " ('2023-12-10','https://music765plus.com/%E7%95%B0%E6%AC%A1%E5%85%83%E3%83%95%E3%82%A7%E3%82%B9_%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E2%98%85%E2%99%A5%EF%B8%8E%E3%83%A9%E3%83%96%E3%83%A9%E3%82%A4%E3%83%96%EF%BC%81%E6%AD%8C%E5%90%88%E6%88%A6#DAY2','異次元フェス アイドルマスター★♥ラブライブ！歌合戦 DAY2')," &
+                " ('2024-01-21','https://music765plus.com/%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%C3%97%E5%B3%B6%E6%A0%B9%E3%82%B9%E3%82%B5%E3%83%8E%E3%82%AA%E3%83%9E%E3%82%B8%E3%83%83%E3%82%AF_%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B3%E3%83%A9%E3%83%9C%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3#DAY2','シンデレラガールズ×島根スサノオマジック スペシャルコラボ')," &
+                " ('2024-02-03','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#YAMAGATA_noon','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 山形 昼公演')," &
+                " ('2024-02-03','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#YAMAGATA_night','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 山形 夜公演')," &
+                " ('2024-03-10','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#IWATE_noon','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 岩手 昼公演')," &
+                " ('2024-03-10','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#IWATE_night','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 岩手 夜公演')," &
+                " ('2024-03-22','https://music765plus.com/%EF%BC%83%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%846%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5LIVE%E3%80%8CSheenderellaDay%E3%80%8D','#星街すいせい6周年記念LIVE「SheenderellaDay」')," &
+                " ('2024-04-06','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#OSAKA_noon','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 大阪 昼公演')," &
+                " ('2024-04-06','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#OSAKA_night','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 大阪 夜公演')," &
+                " ('2024-05-19','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#FUKUOKA_noon','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 福岡 昼公演')," &
+                " ('2024-05-19','https://music765plus.com/THE_IDOLM@STER_CINDERELLA_GIRLS_UNIT_LIVE_TOUR_ConnecTrip!#FUKUOKA_night','CINDERELLA GIRLS UNIT LIVE TOUR ConnecTrip! 福岡 夜公演')"
             cmd.CommandText = strSQL
             cmd.ExecuteNonQuery()
-        End Using
 
-        I_GetDataFrommusic765plus()
+            I_GetDataFrommusic765plus()
+
+            For ii = 0 To LC_Song.Count - 1
+                Console.WriteLine(LC_Song(ii).Name)
+                cmd.CommandText = "insert into 楽曲テーブル" &
+                                  "(楽曲id, 楽曲名) values (" &
+                                  LC_Song(ii).SongID.ToString & "," &
+                                  "'" & LC_Song(ii).Name.Replace("'", "''") & "')"
+                cmd.ExecuteNonQuery()
+            Next
+
+            For ii = 0 To LC_Sing.Count - 1
+                Console.WriteLine(LC_Sing(ii).LiveID & ":" & LC_Sing(ii).No)
+                cmd.CommandText = "insert into 歌唱テーブル" &
+                                          "(ライブid,曲順,楽曲id) values (" &
+                                          LC_Sing(ii).LiveID.ToString & "," &
+                                          LC_Sing(ii).No.ToString & "," &
+                                          LC_Sing(ii).SongID & ")"
+                cmd.ExecuteNonQuery()
+            Next
+        End Using
     End Sub
 
     ''' <summary>
@@ -241,6 +270,7 @@ Module mdl_music765plus
     Private Function I_GetDataFrommusic765plus() As Boolean
         Dim bRet As Boolean = True
         Dim strSQL As String = ""
+        Dim iNo As Integer = 0
 
         Try
             Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
@@ -273,11 +303,25 @@ Module mdl_music765plus
                                     End If
 
                                     '探すぞう
+                                    Dim bHit As Boolean = False
                                     Do While strLine IsNot Nothing
                                         Select Case True
                                             Case strLine.StartsWith("<td><span class=""Pfont3"">")
                                                 '多分楽曲
-                                                Call I_GetSong(strLine, reader("ライブid"))
+                                                iNo += 1
+                                                '空読み*2
+                                                sr.ReadLine()
+                                                sr.ReadLine()
+                                                Dim strPerformar As String = sr.ReadLine
+                                                Call I_GetSong(strLine, reader("ライブid"), iNo, strPerformar)
+                                                bHit = True
+                                            Case strLine.StartsWith("<h6><span id="),
+                                                 strLine.StartsWith("<h6><span class=""mw-headline"),
+                                                 strLine.StartsWith("<h5><span class=""mw-headline")
+                                                If bHit = True Then
+                                                    '多分別イベント
+                                                    Exit Do
+                                                End If
                                         End Select
                                         strLine = sr.ReadLine
                                     Loop
@@ -296,12 +340,13 @@ Module mdl_music765plus
         Return bRet
     End Function
 
-    Private Sub I_GetSong(ByVal strLine As String, ByVal iLiveID As Integer)
+    Private Sub I_GetSong(ByVal strLine As String, ByVal iLiveID As Integer, ByVal iNo As Integer, ByVal strPerformar As String)
         Dim iLoc As Integer = strLine.IndexOf("title=")
         If iLoc > 0 Then
             Dim iEnd As Integer = strLine.IndexOf(">", iLoc)
             Dim strName As String = strLine.Substring(iLoc + 7, iEnd - iLoc - 8)
 
+            '楽曲データ
             Dim iSongID As Integer
             Dim results = LC_Song.Where(Function(s) s.Name = strName)
             If results.Count = 0 Then
@@ -315,6 +360,77 @@ Module mdl_music765plus
                 'あった
                 iSongID = results(0).SongID
             End If
+
+            '歌唱データ
+            Dim sing As New clsSing
+            sing.LiveID = iLiveID
+            sing.No = iNo
+            sing.SongID = iSongID
+            sing.guid = Guid.NewGuid()
+            LC_Sing.Add(sing)
+
+            '歌唱者データ
+            Dim strP As String() = I_GetPerformar(strPerformar).Split(",")
+            For ii = 0 To strP.Count - 1
+                If I_IsCinderella(strP(ii)) = True Then
+                    Dim performer As New clsPerformer
+                    performer.Flag = 0
+                    performer.guid = sing.guid
+                    performer.PerformerName = strP(ii)
+                    LC_Performer.Add(performer)
+                End If
+            Next
         End If
     End Sub
+
+    Private Function I_GetPerformar(ByVal strTarget As String) As String
+        Dim strRet As String
+
+        strRet = strTarget.Replace("（間奏後から", ",")
+        strRet = strRet.Replace("が参加）", "")
+        strRet = strRet.Replace("ピティーブルー（", "")
+        strRet = strRet.Replace("new generations（", "")
+        strRet = strRet.Replace("dream generations（", "")
+        strRet = strRet.Replace("トライアドプリムス（", "")
+        strRet = strRet.Replace("Rosenburg Engel（", "")
+        strRet = strRet.Replace("（LOVE LAIKAソロバージョン）", "")
+        strRet = strRet.Replace("CANDY ISLAND（", "")
+        strRet = strRet.Replace("凸レーション（", "")
+        strRet = strRet.Replace("＊(Asterisk)（", "")
+        strRet = strRet.Replace("THE IDOLM@STER THREE STARS!!!（", "")
+        strRet = strRet.Replace("ラスト近くにシンデレラガールズがダンサーとして登場", "")
+        strRet = strRet.Replace("）", "")
+        strRet = strRet.Replace("）", "")
+        strRet = strRet.Replace("<td>", "")
+        strRet = strRet.Replace("&#160;", "")
+        strRet = strRet.Replace("、", ",")
+        strRet = strRet.Trim
+
+        Console.WriteLine(strRet)
+
+        Return strRet
+    End Function
+
+    ''' <summary>
+    ''' あなたシンデレラガールズの人？
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function I_IsCinderella(ByVal strName As String) As Boolean
+        Dim bRet As Boolean = False
+
+        Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
+            cn.Open()
+            Using cmd As New SQLite.SQLiteCommand
+                cmd.Connection = cn
+                cmd.CommandText = "select count(*) from 声優テーブル" &
+                                  " where 声優名 = @p0"
+                cmd.Parameters.AddWithValue("@p0", strName)
+                If cmd.ExecuteScalar > 0 Then
+                    bRet = True
+                End If
+            End Using
+        End Using
+
+        Return bRet
+    End Function
 End Module
