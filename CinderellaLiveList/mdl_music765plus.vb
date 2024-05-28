@@ -25,24 +25,33 @@ Module mdl_music765plus
     Dim LC_Song As New List(Of clsSong)
     Dim LC_Sing As New List(Of clsSing)
     Dim LC_Performer As New List(Of clsPerformer)
+    Dim LG_NameChar As New List(Of String)
+    Dim LG_LogPath As String = Path.Combine(Path.GetTempPath, "debug.log")
 
     ''' <summary>
     ''' テーブル初期化
     ''' </summary>
     Public Sub C_SQLiteInitTable_music765plus()
         Using cn As New SQLite.SQLiteConnection(DB_CS_SQLite)
+            'ろぐけす
+            If File.Exists(LG_LogPath) = True Then
+                File.Delete(LG_LogPath)
+            End If
+
             'ｵﾌﾟｰﾝ
             cn.Open()
 
             Dim cmd As New SQLite.SQLiteCommand()
             cmd.Connection = cn
 
-            Dim strSQL As String = ""
-
             cmd.CommandText = "delete from ライブテーブル"
             cmd.ExecuteNonQuery()
+            cmd.CommandText = "delete from 楽曲テーブル"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "delete from 歌唱テーブル"
+            cmd.ExecuteNonQuery()
 
-            strSQL = "insert into ライブテーブル" &
+            Dim strSQL As String = "insert into ライブテーブル" &
                 " (ライブ日付,ライブデータ,ライブ名)" &
                 " values" &
                 " ('2012-05-04','https://music765plus.com/%E3%83%9E%E3%83%81%E2%98%85%E3%82%A2%E3%82%BD%E3%83%93%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#.E3.83.9E.E3.83.81.E2.98.85.E3.82.A2.E3.82.BD.E3.83.93vol.8','マチ★アソビ シンデレラガールズ記念トークショー')," &
@@ -277,11 +286,27 @@ Module mdl_music765plus
                 cn.Open()
                 Using cmd As New SQLite.SQLiteCommand
                     cmd.Connection = cn
-                    cmd.CommandText = "select * from ライブテーブル" &
-                                      " order by ライブid"
+
+                    '声優文字列取得
+                    cmd.CommandText = "select 声優名 from 声優テーブル"
                     Dim reader As SQLite.SQLiteDataReader = cmd.ExecuteReader
                     Do While reader.Read
+                        Dim strName As String = reader("声優名")
+                        For ii = 0 To strName.Length - 1
+                            If LG_NameChar.IndexOf(strName.Substring(ii, 1)) = -1 Then
+                                LG_NameChar.Add(strName.Substring(ii, 1))
+                            End If
+                        Next
+                    Loop
+                    reader.Close()
+
+                    'ライブ情報分くるくる
+                    cmd.CommandText = "select * from ライブテーブル" &
+                                      " order by ライブid"
+                    reader = cmd.ExecuteReader
+                    Do While reader.Read
                         Console.WriteLine(reader("ライブid").ToString & " : " & reader("ライブ名"))
+                        I_Log(reader("ライブid").ToString & " : " & reader("ライブ名"))
                         Using wc As New WebClient
                             '指定したURLからデータを取得する
                             Using ws As Stream = wc.OpenRead(reader("ライブデータ"))
@@ -341,10 +366,12 @@ Module mdl_music765plus
     End Function
 
     Private Sub I_GetSong(ByVal strLine As String, ByVal iLiveID As Integer, ByVal iNo As Integer, ByVal strPerformar As String)
+        I_Log(strLine)
         Dim iLoc As Integer = strLine.IndexOf("title=")
         If iLoc > 0 Then
             Dim iEnd As Integer = strLine.IndexOf(">", iLoc)
             Dim strName As String = strLine.Substring(iLoc + 7, iEnd - iLoc - 8)
+            I_Log("曲名 = " & strName)
 
             '楽曲データ
             Dim iSongID As Integer
@@ -384,29 +411,22 @@ Module mdl_music765plus
     End Sub
 
     Private Function I_GetPerformar(ByVal strTarget As String) As String
-        Dim strRet As String
+        I_Log(strTarget)
+        Dim strRet As String = ""
 
-        strRet = strTarget.Replace("（間奏後から", ",")
-        strRet = strRet.Replace("が参加）", "")
-        strRet = strRet.Replace("ピティーブルー（", "")
-        strRet = strRet.Replace("new generations（", "")
-        strRet = strRet.Replace("dream generations（", "")
-        strRet = strRet.Replace("トライアドプリムス（", "")
-        strRet = strRet.Replace("Rosenburg Engel（", "")
-        strRet = strRet.Replace("（LOVE LAIKAソロバージョン）", "")
-        strRet = strRet.Replace("CANDY ISLAND（", "")
-        strRet = strRet.Replace("凸レーション（", "")
-        strRet = strRet.Replace("＊(Asterisk)（", "")
-        strRet = strRet.Replace("THE IDOLM@STER THREE STARS!!!（", "")
-        strRet = strRet.Replace("ラスト近くにシンデレラガールズがダンサーとして登場", "")
-        strRet = strRet.Replace("）", "")
-        strRet = strRet.Replace("）", "")
-        strRet = strRet.Replace("<td>", "")
-        strRet = strRet.Replace("&#160;", "")
-        strRet = strRet.Replace("、", ",")
-        strRet = strRet.Trim
+        strTarget = strTarget.Replace("M･A･O", "M・A・O")
+        strTarget = strTarget.Replace("ルゥ ティン", "ルゥ・ティン")
 
-        Console.WriteLine(strRet)
+        For ii = 0 To strTarget.Length - 1
+            Dim strC As String = strTarget.Substring(ii, 1)
+            If LG_NameChar.IndexOf(strC) >= 0 Then
+                strRet &= strC
+            Else
+                strRet &= ","
+            End If
+        Next
+
+        I_Log(strRet)
 
         Return strRet
     End Function
@@ -433,4 +453,15 @@ Module mdl_music765plus
 
         Return bRet
     End Function
+
+    ''' <summary>
+    ''' ろぐかく
+    ''' </summary>
+    ''' <param name="strMsg"></param>
+    Private Sub I_Log(ByVal strMsg As String)
+        Using sw As New StreamWriter(LG_LogPath, True, System.Text.Encoding.UTF8)
+            sw.WriteLine("[" & Date.Now.ToString("yyyy/MM/dd HH:mm:ss.fff") & "]" & strMsg)
+            sw.Flush()
+        End Using
+    End Sub
 End Module
